@@ -111,8 +111,8 @@ This document provides a sample implementation and threat model for it.
  <title>Shared Key</title>
  <meta content="Shared Key" property="og:title"/>
  <meta content="You've been invited to add a shared digital car key to your device." property="og:description"/>
- <meta content="https://example.com/displayInfo/general.png" property="og:url"/>
- <meta content="https://example.com/displayInfo/general.png" property="og:image"/>
+ <meta content="example.com/displayInfo/general.png" property="og:url"/>
+ <meta content="example.com/displayInfo/general.png" property="og:image"/>
  <meta content="200" property="og:image:width"/>
  <meta content="100" property="og:image:height"/>
 </head>
