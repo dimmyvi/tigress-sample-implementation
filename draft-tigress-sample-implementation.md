@@ -1,14 +1,11 @@
 ---
-###
-# Tigress sample implementation
-#
 
 title: "Transfer Digital Credentials Securely: sample implementation and threat model"
 abbrev: "tigress-sample-implementation"
 category: info
 
 docname: draft-tigress-sample-implementation-latest
-submissiontype: IETF, "independent"
+submissiontype: IETF
 number:
 date:
 consensus: true
@@ -16,7 +13,13 @@ v: 3
 area: ART
 workgroup: Tigress
 keyword: Internet-Draft
-venue: TBD
+venue:
+#  group: WG
+#  type: Working Group
+#  mail: tigress@ietf.org
+#  arch: "https://mailarchive.ietf.org/arch/browse/tigress"
+  github: "dimmyvi/tigress-sample-implementation"
+  latest: "https://github.com/dimmyvi/tigress-sample-implementation"
 
 author:
  -
@@ -137,7 +140,7 @@ This document provides a sample implementation and threat model for it.
 
 
 # Threat Model
-TBD
+To be added
 
 # Security Considerations
 
