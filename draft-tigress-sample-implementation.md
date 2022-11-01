@@ -92,16 +92,17 @@ This document provides a sample implementation and threat model for it.
 
 # Sample Implementation - Digital CarKey sharing example.
 
-- An owner device (Sender) starts sharing flow with selection of credential entitlements for the key shared - e.g. access entitlements (allow open the car, allow start the engine, allow to drive the car), time of sharing - e.g. from 09/01/2022 to 09/03/2022, then generates a KeyCreationRequest (per CCC spec). 
+- An owner device (Sender) starts sharing flow with selection of credential entitlements for the key shared - e.g. access entitlements (allow open the car, allow start the engine, allow to drive the car), time of sharing - e.g. from 09/01/2022 to 09/03/2022, then generates a KeyCreationRequest (per CCC spec).
 
 - The owner device generates a new symmetric encryption key (Secret) and encrypts the data. Then generates an attestation blob, that follows a WebAuthn API, specific to Apple - AAA (Apple Anonymous Attestation), which covers the encrypted content. Owner device makes a call to Relay server (Intermediary) - createMailbox, passing over the encrypted content, device attestation, mailbox configuration (mailbox time-to-live, access rights - RWD), preview (display information) details, it’s push notification token and a unique deviceClaim.
 
-- Relay server verifies device attestation using WebAuthn verification rules specific to AAA, including verifying device PKI certificate in attestation blob. Relay server creates a mailbox, using mailboxConfiguration received in the request and stores encrypted content in it. 
-- The mailbox has a time-to-live, time, when it is to expire and be deleted by the Relay server. This time is limited by the value that can be considered both sufficient to complete the transfer and secure to against brute force attacks on the encrypted content the content - e.g. 48 hours. 
+- Relay server verifies device attestation using WebAuthn verification rules specific to AAA, including verifying device PKI certificate in attestation blob. Relay server creates a mailbox, using mailboxConfiguration received in the request and stores encrypted content in it.
 
-- Relay server generates a unique mailboxIdentifier value, that is hard to predict - e.g. using GUID - and builds a full URL (shareURL) referencing the mailbox - e.g. www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002 (http://www.example.com/v1/m/), which it returns to the Owner device.
+- The mailbox has a time-to-live, time, when it is to expire and be deleted by the Relay server. This time is limited by the value that can be considered both sufficient to complete the transfer and secure to against brute force attacks on the encrypted content the content - e.g. 48 hours.
 
-- Owner device locally stores the shareURL and the Secret and sends the shareURL with optional vertical in URL parameter and mandatory secret in Fragment part (e.g. www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002 (http://www.example.com/v1/m/)?v=c#hXlr6aRC7KgJpOLTNZaLsw==) to the Friend’s device (Receiver) over SMS.
+- Relay server generates a unique mailboxIdentifier value, that is hard to predict - e.g. using GUID - and builds a full URL (shareURL) referencing the mailbox - e.g. "www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002", which it returns to the Owner device.
+
+- Owner device locally stores the shareURL and the Secret and sends the shareURL with optional vertical in URL parameter and mandatory secret in Fragment part (e.g. "www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002?v=c#hXlr6aRC7KgJpOLTNZaLsw==") to the Friend’s device (Receiver) over SMS.
 
 - Friend device receives the shareURL in SMS, messaging application makes an automatic GET call to shareURL (excluding Fragment part - Secret) - and fetches a preview (Display Information) html page with OpenGraph tags in the head:
 
@@ -111,8 +112,8 @@ This document provides a sample implementation and threat model for it.
  <title>Shared Key</title>
  <meta content="Shared Key" property="og:title"/>
  <meta content="You've been invited to add a shared digital car key to your device." property="og:description"/>
- <meta content="example.com/displayInfo/general.png" property="og:url"/>
- <meta content="example.com/displayInfo/general.png" property="og:image"/>
+ <meta content="https://example.com/displayInfo/general.png" property="og:url"/>
+ <meta content="https://example.com/displayInfo/general.png" property="og:image"/>
  <meta content="200" property="og:image:width"/>
  <meta content="100" property="og:image:height"/>
 </head>
