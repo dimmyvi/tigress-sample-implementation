@@ -105,6 +105,7 @@ This document provides a sample implementation and threat model for it.
 
 - Friend device receives the shareURL in SMS, messaging application makes an automatic GET call to shareURL (excluding Fragment part - Secret) - and fetches a preview (Display Information) html page with OpenGraph tags in the head:
 
+~~~
 <html prefix="og: https://ogp.me/ns#">
 <head>
  <title>Shared Key</title>
@@ -116,6 +117,7 @@ This document provides a sample implementation and threat model for it.
  <meta content="100" property="og:image:height"/>
 </head>
 </html>
+~~~
 {: #opengraph-preview title="OpenGraph preview of a credential"}
 
 - Messaging application shows the user a preview of the carKey that Owner wants to share with them. User accepts the shareURL by clicking on the preview in the messaging application. Messaging application redirects the user to wallet (credential manager application) using a deep link mechanism embedded into the OS. 
@@ -140,7 +142,8 @@ This document provides a sample implementation and threat model for it.
 
 
 # Threat Model
-To be added
+
+![threat_model](threat_model.png){:height="36px" width="36px"}
 
 # Security Considerations
 
