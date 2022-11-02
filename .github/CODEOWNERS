@@ -1,0 +1,3 @@
+# Automatically generated CODEOWNERS
+# Regenerate with `make update-codeowners`
+draft-tigress-sample-implementation.md dvinokurov@apple.com abulgakov@apple.com jgiraud@apple.com castiz@apple.com a_pelletier@apple.com
