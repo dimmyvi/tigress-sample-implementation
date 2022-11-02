@@ -212,7 +212,7 @@ Table of Contents
 
    Threat model for the sample implementation is provided below.
 
-   ![threat_model](threat_model.jpg){: height="665px" width="1281px"}.
+   ![threat_model](threat_model.jpg)
 
 5.  Security Considerations
 
