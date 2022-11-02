@@ -210,9 +210,10 @@ Table of Contents
 
 4.  Threat Model
 
-   Threat model for the sample implementation is provided below.
-
-   ![threat_model](threat_model.jpg)
+   Threat model for the sample implementation is provided at the
+   following URL: [threat_model]: https://github.com/dimmyvi/tigress-
+   sample-implementation/blob/main/threat_model.png "Threat model for
+   Tigress sample implementation"
 
 5.  Security Considerations
 
