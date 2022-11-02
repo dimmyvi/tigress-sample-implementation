@@ -9,8 +9,8 @@ submissiontype: IETF
 number:
 date:
 v: 3
-# area: ART
-# workgroup: Tigress
+area: ART
+workgroup: Tigress
 keyword: Internet-Draft
 venue:
 #  group: WG
@@ -18,7 +18,7 @@ venue:
 #  mail: tigress@ietf.org
 #  arch: "https://mailarchive.ietf.org/arch/browse/tigress"
   github: "dimmyvi/tigress-sample-implementation"
-  latest: "https://dimmyvi.github.io/tigress-sample-implementation/draft-tigress-sample-implementation.html"
+  latest: "https://github.com/dimmyvi/tigress-sample-implementation"
 
 author:
  -
@@ -143,8 +143,8 @@ This document provides a sample implementation and threat model for it.
 
 # Threat Model
 
-Threat model for the sample implementation is provided below.
-![Threat model diagram](./threat_model.png){: class="img-responsive"}
+    ![threat_model](images/threat_model.jpg){: height="975px" width="1940px"}.
+
 
 # Security Considerations
 
