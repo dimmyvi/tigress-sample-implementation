@@ -144,8 +144,8 @@ This document provides a sample implementation and threat model for it.
 # Threat Model
 
   Threat model for the sample implementation is provided below.
-  <img src="https://github.com/dimmyvi/tigress-sample-implementation/blob/main/threat_model.svg" width="1281" />
-
+  ![./threat_model.svg](./threat_model.svg)
+  
 
 # Security Considerations
 
