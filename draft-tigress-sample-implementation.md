@@ -9,8 +9,8 @@ submissiontype: IETF
 number:
 date:
 v: 3
-area: ART
-workgroup: Tigress
+# area: ART
+# workgroup: Tigress
 keyword: Internet-Draft
 venue:
 #  group: WG
@@ -18,7 +18,7 @@ venue:
 #  mail: tigress@ietf.org
 #  arch: "https://mailarchive.ietf.org/arch/browse/tigress"
   github: "dimmyvi/tigress-sample-implementation"
-  latest: "https://github.com/dimmyvi/tigress-sample-implementation"
+  latest: "https://dimmyvi.github.io/tigress-sample-implementation/draft-tigress-sample-implementation.html"
 
 author:
  -
