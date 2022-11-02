@@ -145,7 +145,7 @@ This document provides a sample implementation and threat model for it.
 
   Threat model for the sample implementation is provided below.
 
-    ![threat_model](threat_model.jpg)
+  ![threat_model](threat_model.jpg)
 
 
 # Security Considerations
