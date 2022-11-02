@@ -143,7 +143,6 @@ This document provides a sample implementation and threat model for it.
 
 # Threat Model
 
-  ![threat_model](./threat_model.png){: height="1950px" width="3880px"}
 
 # Security Considerations
 
