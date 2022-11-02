@@ -145,7 +145,7 @@ This document provides a sample implementation and threat model for it.
 
   Threat model for the sample implementation is provided below.
 
-    ![threat_model](threat_model.jpg){: height="665px" width="1281px"}.
+    ![threat_model](threat_model.jpg)
 
 
 # Security Considerations
