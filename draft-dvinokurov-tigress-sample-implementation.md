@@ -144,7 +144,7 @@ This document provides a sample implementation and threat model for it.
 # Threat Model
 
   Threat model for the sample implementation is provided below.
-  ![Tigress-threat-model[(threat_model.jpg)
+  ![Tigress-threat-model](threat_model.jpg)
 
 
 # Security Considerations
