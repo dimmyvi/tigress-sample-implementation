@@ -4,7 +4,7 @@ title: "Transfer Digital Credentials Securely: sample implementation and threat 
 abbrev: "tigress-sample-implementation"
 category: info
 
-docname: draft-tigress-sample-implementation-latest
+docname: draft-dvinokurov-tigress-sample-implementation-latest
 submissiontype: IETF
 number:
 date:
