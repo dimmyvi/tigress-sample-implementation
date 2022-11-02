@@ -1,0 +1,269 @@
+
+
+
+
+Tigress                                                     D. Vinokurov
+Internet-Draft                                               A. Bulgakov
+Intended status: Informational                              J. L. Giraud
+Expires: 6 May 2023                                             C. Astiz
+                                                            A. Pelletier
+                                                               Apple Inc
+                                                         2 November 2022
+
+
+Transfer Digital Credentials Securely: sample implementation and threat
+                                 model
+         draft-dvinokurov-tigress-sample-implementation-latest
+
+Abstract
+
+   This document describes a sample implementation and its threat model
+   of the secure transfer of digital credentials (Tigress) solution of
+   the corresponding Tigress Internet-draft [Tigress-00].
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at
+   https://github.com/dimmyvi/tigress-sample-implementation.  Status
+   information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-dvinokurov-tigress-sample-
+   implementation/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/dimmyvi/tigress-sample-implementation.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 6 May 2023.
+
+Copyright Notice
+
+   Copyright (c) 2022 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  Sample Implementation - Digital CarKey sharing example.
+   4.  Threat Model
+   5.  Security Considerations
+   6.  IANA Considerations
+   7.  Normative References
+   Acknowledgments
+   Authors' Addresses
+
+1.  Introduction
+
+   This document provides a sample implementation and threat model for
+   it.
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+3.  Sample Implementation - Digital CarKey sharing example.
+
+   *  An owner device (Sender) starts sharing flow with selection of
+      credential entitlements for the key shared - e.g. access
+      entitlements (allow open the car, allow start the engine, allow to
+      drive the car), time of sharing - e.g. from 09/01/2022 to
+      09/03/2022, then generates a KeyCreationRequest (per CCC spec).
+
+   *  The owner device generates a new symmetric encryption key (Secret)
+      and encrypts the data.  Then generates an attestation blob, that
+      follows a WebAuthn API, specific to Apple - AAA (Apple Anonymous
+      Attestation), which covers the encrypted content.  Owner device
+      makes a call to Relay server (Intermediary) - createMailbox,
+      passing over the encrypted content, device attestation, mailbox
+      configuration (mailbox time-to-live, access rights - RWD), preview
+      (display information) details, it's push notification token and a
+      unique deviceClaim.
+
+   *  Relay server verifies device attestation using WebAuthn
+      verification rules specific to AAA, including verifying device PKI
+      certificate in attestation blob.  Relay server creates a mailbox,
+      using mailboxConfiguration received in the request and stores
+      encrypted content in it.
+
+   *  The mailbox has a time-to-live, time, when it is to expire and be
+      deleted by the Relay server.  This time is limited by the value
+      that can be considered both sufficient to complete the transfer
+      and secure to against brute force attacks on the encrypted content
+      the content - e.g. 48 hours.
+
+   *  Relay server generates a unique mailboxIdentifier value, that is
+      hard to predict - e.g. using GUID - and builds a full URL
+      (shareURL) referencing the mailbox - e.g. "www.example.com/v1/
+      m/2bba630e-519b-11ec-bf63-0242ac130002", which it returns to the
+      Owner device.
+
+   *  Owner device locally stores the shareURL and the Secret and sends
+      the shareURL with optional vertical in URL parameter and mandatory
+      secret in Fragment part (e.g. "www.example.com/v1/m/2bba630e-519b-
+      11ec-bf63-0242ac130002?v=c#hXlr6aRC7KgJpOLTNZaLsw==") to the
+      Friend's device (Receiver) over SMS.
+
+   *  Friend device receives the shareURL in SMS, messaging application
+      makes an automatic GET call to shareURL (excluding Fragment part -
+      Secret) - and fetches a preview (Display Information) html page
+      with OpenGraph tags in the head:
+
+<html prefix="og: https://ogp.me/ns#">
+<head>
+ <title>Shared Key</title>
+ <meta content="Shared Key" property="og:title"/>
+ <meta content="You've been invited to add a shared digital car key to your device." property="og:description"/>
+ <meta content="https://example.com/displayInfo/general.png" property="og:url"/>
+ <meta content="https://example.com/displayInfo/general.png" property="og:image"/>
+ <meta content="200" property="og:image:width"/>
+ <meta content="100" property="og:image:height"/>
+</head>
+</html>
+
+             Figure 1: OpenGraph preview of a credential
+
+   *  Messaging application shows the user a preview of the carKey that
+      Owner wants to share with them.  User accepts the shareURL by
+      clicking on the preview in the messaging application.  Messaging
+      application redirects the user to wallet (credential manager
+      application) using a deep link mechanism embedded into the OS.
+
+   *  Wallet receives the shareURL with the Secret in the Fragment.
+      Friend device checks if the Relay server is in allow-list of
+      accepted Relay servers.
+
+   *  Wallet reads secure content from the mailbox using shareURL
+      (without the Fragment part) with HTTP POST method, passing a
+      unique deviceClaim with the request.  Relay server binds the
+      mailbox (identified by mailboxIdentifier) with the Owner device
+      (with Owner device deviceClaim) and the Friend device (with Friend
+      device deviceClaim).  Now only these 2 devices are allowed to read
+      and write secure content to this particular mailbox.  This secures
+      the message exchange and prevents other devices from altering the
+      exchange between Owner and Friend.
+
+   *  Friend's device decrypts secure content using Secret and extracts
+      KeyCreationRequest (ref to CCC specification).
+
+   *  Friend device generates a KeySigningRequest (ref to CCC
+      specification), encrypts it with Secret and uploads to the mailbox
+      with UpdateMailbox call to Relay server, providing its unique
+      deviceClaim and push notification token.
+
+   *  Relay server sends a push notification to Owner's device via Push
+      Notification Server.
+
+   *  Owner device, having received a push notification message, reads
+      secure content from the mailbox using shareURL with HTTP POST
+      method, passing its unique deviceClaim with the request.  Owner
+      device decrypts secure content using Secret and extracts
+      KeySigningRequest (ref to CCC specification).
+
+   *  Owner device signs the Friend's device public key with Owner's
+      private key and creates a KeyImportRequest (ref to CCC
+      specification).  Owner device encrypts it with the Secret and
+      uploads to the mailbox with with UpdateMailbox call to Relay
+      server, providing its unique deviceClaim.
+
+   *  Relay server sends a push notification to Friend device via Push
+      Notification Server.
+
+   *  Friend device, having received a push notification message, reads
+      secure content from the mailbox using shareURL with HTTP POST
+      method, passing its unique deviceClaim with the request.  Friend
+      device decrypts secure content using Secret and extracts
+      KeyImportRequest (ref to CCC specification).  Friend device
+      provisions the new credential to the wallet and deletes the
+      mailbox with DeleteMailbox call to the Relay server.  As an
+      additional security measure, Friend device asks for a verification
+      code (PIN code) generated by Owner device and communicated to
+      Friend out-of-band.
+
+4.  Threat Model
+
+   Threat model for the sample implementation is provided below.
+   ![Tigress-threat-model[(threat_model.jpg)
+
+5.  Security Considerations
+
+   TODO Security
+
+6.  IANA Considerations
+
+   This document has no IANA actions.
+
+7.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [Tigress-00]
+              Vinokurov, D., Byington, M., Lerch, M., Pelletier, A., and
+              N. Sha, "Transfer Digital Credentials Securely", September
+              2022,
+              <https://datatracker.ietf.org/doc/draft-art-tigress/>.
+
+Acknowledgments
+
+   TODO acknowledge.
+
+Authors' Addresses
+
+   Dmitry Vinokurov
+   Apple Inc
+   Email: dvinokurov@apple.com
+
+
+   Alexey Bulgakov
+   Apple Inc
+   Email: abulgakov@apple.com
+
+
+   Jean-Luc Giraud
+   Apple Inc
+   Email: jgiraud@apple.com
+
+
+   Casey Astiz
+   Apple Inc
+   Email: castiz@apple.com
+
+
+   Alex Pelletier
+   Apple Inc
+   Email: a_pelletier@apple.com
