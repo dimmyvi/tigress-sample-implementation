@@ -144,7 +144,7 @@ This document provides a sample implementation and threat model for it.
 # Threat Model
 
 Threat model for the sample implementation is provided below.
-![Threat model diagram](./threat_model.png){: class="img-responsive"}
+    ![threat_model](threat_model.png){: height="1950px" width="3880px"}.
 
 # Security Considerations
 
