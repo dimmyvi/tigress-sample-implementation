@@ -211,7 +211,8 @@ Table of Contents
 4.  Threat Model
 
    Threat model for the sample implementation is provided below.
-   ![Tigress-threat-model[(threat_model.jpg)
+
+   ![threat_model](threat_model.jpg){: height="665px" width="1281px"}.
 
 5.  Security Considerations
 
