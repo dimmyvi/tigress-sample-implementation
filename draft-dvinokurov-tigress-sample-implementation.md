@@ -144,7 +144,7 @@ This document provides a sample implementation and threat model for it.
 # Threat Model
 
   Threat model for the sample implementation is provided below.
-  ![./threat_model.svg](./threat_model.svg)
+  ![threat_model](threat_model.svg)
   
 
 # Security Considerations
