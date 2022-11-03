@@ -235,13 +235,11 @@ Table of Contents
    |    |            |               |Owner's car  |              |       |
    +----+------------+---------------+-------------+--------------+-------+
    |2   |Content on  |Content        |Exposure of  |Strong source |       |
-   |    |            |recovery by    |encrypted    |of randomness |       |
-   |    |            |               |content      |for salt      |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |Intermediary|brute forcing  |and key      |At least 128  |       |
-   |    |            |secret         |redemption   |bit key lenght|       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |server      |               |             |Limitted TTL  |       |
+   |    |Intermediary|recovery by    |encrypted    |of randomness |       |
+   |    |server      |brute forcing  |content and  |for salt, At  |       |
+   |    |            |secret         |key          |least 128 bit |       |
+   |    |            |               |redemption   |key lenght,   |       |
+   |    |            |               |             |Limitted TTL  |       |
    |    |            |               |             |of the mailbox|       |
    +----+------------+---------------+-------------+--------------+-------+
    |3   |Content on  |Content        |Ability to   |Physical      |       |
