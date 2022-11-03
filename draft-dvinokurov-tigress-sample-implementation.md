@@ -157,9 +157,7 @@ Threat model for the sample implementation is provided at the following URL:
 |------+------------+------------------------+----------------------------------+------------------------------------------+---------|
 | Item |   Asset    |   Threat               |     Impact                       |     Mitigation                           | Comment |
 |:-----|:-----------|:-----------------------|:---------------------------------|:-----------------------------------------|:--------|
-|   1  | Owner's DCK| Kicking-off arbitrary  | DCK become shared with arbitrary | User auth (face/touch ID)                |         |
-|      |            | key sharing by         | user/adversary allowing them     | Secure Intent                            |         |
-|      |            | spoofing user identity | access to the Owner's car        |                                          |         |
+|   1  | Owner's DCK| Kicking-off arbitrary key sharing by spoofing user identity | DCK become shared with arbitrary user/adversary allowing them access to the Owner's car| User auth (face/touch ID), Secure Intent                |         |
 |------+------------+------------------------+----------------------------------+------------------------------------------+---------|
 | 2    | Content on | Content recovery by    | Exposure of encrypted content    | Strong source of randomness for salt     |         |
 |      |Intermediary|  brute forcing secret  | and key redemption               | At least 128 bit key lenght              |         |
