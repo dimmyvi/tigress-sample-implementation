@@ -89,6 +89,10 @@ This document provides a sample implementation and threat model for it.
 
 {::boilerplate bcp14-tagged}
 
+- DCK - Digital Car Key
+- AP - Application Processor
+- TTL - Time To Live
+
 # Sample Implementation - Digital CarKey sharing example.
 
 - An owner device (Sender) starts sharing flow with selection of credential entitlements for the key shared - e.g. access entitlements (allow open the car, allow start the engine, allow to drive the car), time of sharing - e.g. from 09/01/2022 to 09/03/2022, then generates a KeyCreationRequest (per CCC spec).
@@ -145,6 +149,53 @@ This document provides a sample implementation and threat model for it.
 
 Threat model for the sample implementation is provided at the following URL:
 [threat_model]: https://github.com/dimmyvi/tigress-sample-implementation/blob/main/threat_model.png "Threat model for Tigress sample implementation"
+
+|------+------------+------------------------+----------------------------------+------------------------------------------+-----------------|
+| Item |   Asset    |   Threat               |     Impact                       |     Mitigation                           |     Comment     |
+|------|:-----------|:----------------------:|---------------------------------:|-----------------------------------------:|----------------:|
+|   1  |  Owner's   | Kicking-off arbitrary  | DCK become shared with arbitrary |- User auth (face/touch ID)               |                 |
+|      |    DCK     | key sharing by         | user/adversary allowing them     |- Secure Intent                           |                 |
+|      |            | spoofing user identity | access to the Owner's car        |                                          |                 |
+|------+------------+------------------------+----------------------------------+------------------------------------------+-----------------|
+| 2    | Content on | Content recovery by    | Exposure of encrypted content    |- Strong source of randomness for salt    |                 |
+|      |Intermediary|  brute forcing secret  | and key redemption               |- At least 128 bit key lenght             |                 |
+|      | server     |                        |                                  |- Limitted TTL of the mailbox             |                 |
+|------+------------+------------------------+----------------------------------+------------------------------------------+-----------------|
+| 3    | Content on | Content recovery by    | Ability to decrypt content       |- Physical separation between             |                 |
+|      |Intermediary|  intercepting secret   | on Intermediary server           | content and secret, e.g. secret sent     |                 |
+|      | server     |                        |                                  | as URI fragment to recipient             |                 |
+|      |            |                        |                                  |- Optional second factor(e.g. Device PIN, |                 |
+|      |            |                        |                                  | Activation Options - please refer to CCC |                 |
+|      |            |                        |                                  | Technical Specification) can be propoused|                 |
+|      |            |                        |                                  | to the user via UI notification based on |                 |
+|      |            |                        |                                  | security options of selected primary     |                 |
+|      |            |                        |                                  | sharing channel (used to share           |                 |
+|      |            |                        |                                  | URL with secret)                         |                 |
+|------+------------+------------------------+----------------------------------+------------------------------------------+-----------------|
+| 4    | Content on | Accees to content by   | Adversary can go to partner and  |- Mailboxes identified by version 4 UUID  |                 |
+|      |Intermediary| multiple arbitrary     | redeem the shared key            | defined in {{!RFC4122}}(hard to guess)   |                 |
+|      | server     | users/devices          | Adversary can send push          |- Mailboxes 'tied' to sender and recipient|                 |
+|      |            |                        | notifications                    | (trust on first use via deviceClaim)     |                 |
+|      |            |                        |                                  |- TTL limit for mailboxes                 |                 |
+|      |            |                        |                                  |- Mailboxes deleted after pass redemption |                 |
+|------+------------+------------------------+----------------------------------+------------------------------------------+-----------------|
+| 5    | Content on | Compromised            |Adversary can redeem the sharedKey|- Separation between content and secret,  |                 |
+|      |Intermediary|  Intermediary server   |                                  | e.g. secret sent as URI fragment         |                 |
+|      | server     |                        | Adversary can send push          | to recipient                             |                 |
+|      |            |                        | notifications                    |- TTL limit for mailboxes                 |                 |
+|------+------------+------------------------+----------------------------------+------------------------------------------+-----------------|
+| 6    | Content on | Unauthenticated access |Adversary can redeem the sharedKey|- Mailboxes identified by version 4 UUID  |                 |
+|      |Intermediary| to mailbox on          |                                  | defined in {{!RFC4122}}(hard to guess)   |                 |
+|      | server /   | Intermediary server    | Adversary can send push          |- Mailboxes 'tied' to sender and recipient|                 |
+|      |Push Tokens |                        | notifications                    | (trust on first use via deviceClaim)     |                 |
+|      |            |                        |                                  |- TTL limit for mailboxes                 |                 |
+|      |            |                        |                                  |- Mailboxes deleted after pass redemption |                 |
+|------+------------+------------------------+----------------------------------+------------------------------------------+-----------------|
+| 7    | Content on | User stores            | Service abuse, Adversary can use |- Mailboxes have size limit               |                 |
+|      |Intermediary| non-credential         | Intermediary server              |- Mailboxes have TTL                      |                 |
+|      | server     | information in mailbox | as cloud storage                 |                                          |                 |
+|      |            | (e.g. "cat pictures")  |                                  |                                          |                 |
+-------+------------+------------------------+----------------------------------+------------------------------------------+-----------------|
 
 # Security Considerations
 
