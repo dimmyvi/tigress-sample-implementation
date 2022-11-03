@@ -226,15 +226,13 @@ Table of Contents
    |Item|Asset       |Threat         |Impact       |Mitigation    |Comment|
    +====+============+===============+=============+==============+=======+
    |1   |Owner's DCK |Kicking-off    |DCK become   |User auth     |       |
-   |    |            |arbitrary      |shared with  |(face/touch   |       |
-   |    |            |               |arbitrary    |ID)           |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |            |key sharing by |user/        |Secure Intent |       |
-   |    |            |               |adversary    |              |       |
+   |    |            |arbitrary key  |shared with  |(face/touch   |       |
+   |    |            |sharing by     |arbitrary    |ID), Secure   |       |
+   |    |            |spoofing user  |user/        |Intent        |       |
+   |    |            |identity       |adversary    |              |       |
    |    |            |               |allowing them|              |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |            |spoofing user  |access to the|              |       |
-   |    |            |identity       |Owner's car  |              |       |
+   |    |            |               |access to the|              |       |
+   |    |            |               |Owner's car  |              |       |
    +----+------------+---------------+-------------+--------------+-------+
    |2   |Content on  |Content        |Exposure of  |Strong source |       |
    |    |            |recovery by    |encrypted    |of randomness |       |
