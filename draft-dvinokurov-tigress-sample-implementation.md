@@ -154,15 +154,11 @@ This document provides a sample implementation and threat model for it.
 Threat model for the sample implementation is provided at the following URL:
 [threat_model]: https://github.com/dimmyvi/tigress-sample-implementation/blob/main/threat_model.png "Threat model for Tigress sample implementation"
 
-|------+------------+------------------------+----------------------------------+------------------------------------------+---------|
 | Item |   Asset    |   Threat               |     Impact                       |     Mitigation                           | Comment |
 |:-----|:-----------|:-----------------------|:---------------------------------|:-----------------------------------------|:--------|
 |   1  | Owner's DCK| Kicking-off arbitrary key sharing by spoofing user identity | DCK become shared with arbitrary user/adversary allowing them access to the Owner's car| User auth (face/touch ID), Secure Intent                |         |
-|------+------------+------------------------+----------------------------------+------------------------------------------+---------|
-| 2    | Content on | Content recovery by    | Exposure of encrypted content    | Strong source of randomness for salt     |         |
-|      |Intermediary|  brute forcing secret  | and key redemption               | At least 128 bit key lenght              |         |
-|      | server     |                        |                                  | Limitted TTL of the mailbox              |         |
-|------+------------+------------------------+----------------------------------+------------------------------------------+---------|
+| 2    | Content on Intermediary server | Content recovery by brute forcing secret | Exposure of encrypted content and key redemption | Strong source of randomness for salt, At least 128 bit key lenght, Limitted TTL of the mailbox |         |
+|------|------------|------------------------|----------------------------------|------------------------------------------|---------|
 | 3    | Content on | Content recovery by    | Ability to decrypt content       | Physical separation between              |         |
 |      |Intermediary|  intercepting secret   | on Intermediary server           | content and secret, e.g. secret sent     |         |
 |      | server     |                        |                                  | as URI fragment to recipient             |         |
