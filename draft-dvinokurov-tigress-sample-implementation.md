@@ -156,21 +156,9 @@ Threat model for the sample implementation is provided at the following URL:
 
 | Item |   Asset    |   Threat               |     Impact                       |     Mitigation                           | Comment |
 |:-----|:-----------|:-----------------------|:---------------------------------|:-----------------------------------------|:--------|
-|   1  | Owner's DCK| Kicking-off arbitrary key sharing by spoofing user identity |- DCK become shared with arbitrary user/adversary allowing them access to the Owner's car| User auth (face/touch ID), - Secure Intent |         |
-|------|------------|------------------------|----------------------------------|------------------------------------------|---------|
-| 2    | Content on Intermediary server | Content recovery by brute forcing secret | Exposure of encrypted content and key redemption |- Strong source of randomness for salt, - At least 128 bit key lenght, - Limitted TTL of the mailbox |         |
-|------|------------|------------------------|----------------------------------|------------------------------------------|---------|
-| 3    | Content on | Content recovery by    | Ability to decrypt content       | Physical separation between              |         |
-|      |Intermediary|  intercepting secret   | on Intermediary server           | content and secret, e.g. secret sent     |         |
-|      | server     |                        |                                  | as URI fragment to recipient             |         |
-|      |            |                        |                                  | Optional second factor(e.g. Device PIN,  |         |
-|      |            |                        |                                  | Activation Options - please refer to CCC |         |
-|      |            |                        |                                  | Technical Specification) can be propoused|         |
-|      |            |                        |                                  | to the user via UI notification based on |         |
-|      |            |                        |                                  | security options of selected primary     |         |
-|      |            |                        |                                  | sharing channel (used to share           |         |
-|      |            |                        |                                  | URL with secret)                         |         |
-|------+------------+------------------------+----------------------------------+------------------------------------------+---------|
+|   1  | Owner's DCK| Kicking-off arbitrary key sharing by spoofing user identity |1) DCK become shared with arbitrary user/adversary allowing them access to the Owner's car| User auth (face/touch ID), 2) Secure Intent |         |
+| 2    | Content on Intermediary server | Content recovery by brute forcing secret | Exposure of encrypted content and key redemption | 1) Strong source of randomness for salt, 2) At least 128 bit key lenght, 3) Limitted TTL of the mailbox |         |
+| 3    | Content on Intermediary server | Content recovery by intercepting secret | Ability to decrypt content on Intermediary server | 1) Physical separation between content and secret, e.g. secret sent as URI fragment to recipient, 2) Optional second factor(e.g. Device PIN, Activation Options - please refer to CCC Technical Specification) can be propoused to the user via UI notification based on security options of selected primary sharing channel (used to share URL with secret) |         |
 | 4    | Content on | Accees to content by   | Adversary can go to partner and  | Mailboxes identified by version 4 UUID   |         |
 |      |Intermediary| multiple arbitrary     | redeem the shared key            | defined in {{!RFC4122}}(hard to guess)   |         |
 |      | server     | users/devices          | Adversary can send push          | Mailboxes 'tied' to sender and recipient |         |
