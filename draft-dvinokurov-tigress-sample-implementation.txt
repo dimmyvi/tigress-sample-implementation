@@ -225,29 +225,28 @@ Table of Contents
    +====+============+===============+=============+==============+=======+
    |Item|Asset       |Threat         |Impact       |Mitigation    |Comment|
    +====+============+===============+=============+==============+=======+
-   |1   |Owner's     |Kicking-off    |DCK become   |- User auth   |       |
+   |1   |Owner's DCK |Kicking-off    |DCK become   |User auth     |       |
    |    |            |arbitrary      |shared with  |(face/touch   |       |
    |    |            |               |arbitrary    |ID)           |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |    |DCK         |key sharing by |user/        |- Secure      |       |
-   |    |            |               |adversary    |Intent        |       |
+   |    |            |key sharing by |user/        |Secure Intent |       |
+   |    |            |               |adversary    |              |       |
    |    |            |               |allowing them|              |       |
    +----+------------+---------------+-------------+--------------+-------+
    |    |            |spoofing user  |access to the|              |       |
    |    |            |identity       |Owner's car  |              |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |2   |Content on  |Content        |Exposure of  |- Strong      |       |
-   |    |            |recovery by    |encrypted    |source of     |       |
-   |    |            |               |content      |randomness for|       |
-   |    |            |               |             |salt          |       |
+   |2   |Content on  |Content        |Exposure of  |Strong source |       |
+   |    |            |recovery by    |encrypted    |of randomness |       |
+   |    |            |               |content      |for salt      |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |    |Intermediary|brute forcing  |and key      |- At least 128|       |
+   |    |Intermediary|brute forcing  |and key      |At least 128  |       |
    |    |            |secret         |redemption   |bit key lenght|       |
    +----+------------+---------------+-------------+--------------+-------+
-   |    |server      |               |             |- Limitted TTL|       |
+   |    |server      |               |             |Limitted TTL  |       |
    |    |            |               |             |of the mailbox|       |
    +----+------------+---------------+-------------+--------------+-------+
-   |3   |Content on  |Content        |Ability to   |- Physical    |       |
+   |3   |Content on  |Content        |Ability to   |Physical      |       |
    |    |            |recovery by    |decrypt      |separation    |       |
    |    |            |               |content      |between       |       |
    +----+------------+---------------+-------------+--------------+-------+
@@ -259,7 +258,7 @@ Table of Contents
    |    |            |               |             |fragment to   |       |
    |    |            |               |             |recipient     |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |             |- Optional    |       |
+   |    |            |               |             |Optional      |       |
    |    |            |               |             |second        |       |
    |    |            |               |             |factor(e.g.   |       |
    |    |            |               |             |Device PIN,   |       |
@@ -291,7 +290,7 @@ Table of Contents
    |    |            |               |             |URL with      |       |
    |    |            |               |             |secret)       |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |4   |Content on  |Accees to      |Adversary can|- Mailboxes   |       |
+   |4   |Content on  |Accees to      |Adversary can|Mailboxes     |       |
    |    |            |content by     |go to partner|identified by |       |
    |    |            |               |and          |version 4 UUID|       |
    +----+------------+---------------+-------------+--------------+-------+
@@ -299,7 +298,7 @@ Table of Contents
    |    |            |arbitrary      |shared key   |[RFC4122](hard|       |
    |    |            |               |             |to guess)     |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |    |server      |users/devices  |Adversary can|- Mailboxes   |       |
+   |    |server      |users/devices  |Adversary can|Mailboxes     |       |
    |    |            |               |send push    |'tied' to     |       |
    |    |            |               |             |sender and    |       |
    |    |            |               |             |recipient     |       |
@@ -308,15 +307,15 @@ Table of Contents
    |    |            |               |             |first use via |       |
    |    |            |               |             |deviceClaim)  |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |             |- TTL limit   |       |
-   |    |            |               |             |for mailboxes |       |
+   |    |            |               |             |TTL limit for |       |
+   |    |            |               |             |mailboxes     |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |             |- Mailboxes   |       |
+   |    |            |               |             |Mailboxes     |       |
    |    |            |               |             |deleted after |       |
    |    |            |               |             |pass          |       |
    |    |            |               |             |redemption    |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |5   |Content on  |Compromised    |Adversary can|- Separation  |       |
+   |5   |Content on  |Compromised    |Adversary can|Separation    |       |
    |    |            |               |redeem the   |between       |       |
    |    |            |               |sharedKey    |content and   |       |
    |    |            |               |             |secret,       |       |
@@ -328,10 +327,10 @@ Table of Contents
    |    |server      |               |Adversary can|to recipient  |       |
    |    |            |               |send push    |              |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |notifications|- TTL limit   |       |
-   |    |            |               |             |for mailboxes |       |
+   |    |            |               |notifications|TTL limit for |       |
+   |    |            |               |             |mailboxes     |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |6   |Content on  |Unauthenticated|Adversary can|- Mailboxes   |       |
+   |6   |Content on  |Unauthenticated|Adversary can|Mailboxes     |       |
    |    |            |access         |redeem the   |identified by |       |
    |    |            |               |sharedKey    |version 4 UUID|       |
    +----+------------+---------------+-------------+--------------+-------+
@@ -339,7 +338,7 @@ Table of Contents
    |    |            |               |             |[RFC4122](hard|       |
    |    |            |               |             |to guess)     |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |    |server /    |Intermediary   |Adversary can|- Mailboxes   |       |
+   |    |server and  |Intermediary   |Adversary can|Mailboxes     |       |
    |    |            |server         |send push    |'tied' to     |       |
    |    |            |               |             |sender and    |       |
    |    |            |               |             |recipient     |       |
@@ -348,21 +347,21 @@ Table of Contents
    |    |            |               |             |first use via |       |
    |    |            |               |             |deviceClaim)  |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |             |- TTL limit   |       |
-   |    |            |               |             |for mailboxes |       |
+   |    |            |               |             |TTL limit for |       |
+   |    |            |               |             |mailboxes     |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |             |- Mailboxes   |       |
+   |    |            |               |             |Mailboxes     |       |
    |    |            |               |             |deleted after |       |
    |    |            |               |             |pass          |       |
    |    |            |               |             |redemption    |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |7   |Content on  |User stores    |Service      |- Mailboxes   |       |
-   |    |            |               |abuse,       |have size     |       |
-   |    |            |               |Adversary can|limit         |       |
+   |7   |Content on  |User stores    |Service      |Mailboxes have|       |
+   |    |            |               |abuse,       |size limit    |       |
+   |    |            |               |Adversary can|              |       |
    |    |            |               |use          |              |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |    |Intermediary|non-credential |Intermediary |- Mailboxes   |       |
-   |    |            |               |server       |have TTL      |       |
+   |    |Intermediary|non-credential |Intermediary |Mailboxes have|       |
+   |    |            |               |server       |TTL           |       |
    +----+------------+---------------+-------------+--------------+-------+
    |    |server      |information in |as cloud     |              |       |
    |    |            |mailbox        |storage      |              |       |
