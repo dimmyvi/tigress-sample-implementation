@@ -225,67 +225,56 @@ Table of Contents
    +====+============+===============+=============+==============+=======+
    |Item|Asset       |Threat         |Impact       |Mitigation    |Comment|
    +====+============+===============+=============+==============+=======+
-   |1   |Owner's DCK |Kicking-off    |- DCK become |User auth     |       |
+   |1   |Owner's DCK |Kicking-off    |1) DCK become|User auth     |       |
    |    |            |arbitrary key  |shared with  |(face/touch   |       |
-   |    |            |sharing by     |arbitrary    |ID), - Secure |       |
+   |    |            |sharing by     |arbitrary    |ID), 2) Secure|       |
    |    |            |spoofing user  |user/        |Intent        |       |
    |    |            |identity       |adversary    |              |       |
    |    |            |               |allowing them|              |       |
    |    |            |               |access to the|              |       |
    |    |            |               |Owner's car  |              |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |2   |Content on  |Content        |Exposure of  |- Strong      |       |
+   |2   |Content on  |Content        |Exposure of  |1) Strong     |       |
    |    |Intermediary|recovery by    |encrypted    |source of     |       |
    |    |server      |brute forcing  |content and  |randomness for|       |
-   |    |            |secret         |key          |salt, - At    |       |
+   |    |            |secret         |key          |salt, 2) At   |       |
    |    |            |               |redemption   |least 128 bit |       |
-   |    |            |               |             |key lenght, - |       |
+   |    |            |               |             |key lenght, 3)|       |
    |    |            |               |             |Limitted TTL  |       |
    |    |            |               |             |of the mailbox|       |
    +----+------------+---------------+-------------+--------------+-------+
-   |3   |Content on  |Content        |Ability to   |Physical      |       |
-   |    |            |recovery by    |decrypt      |separation    |       |
-   |    |            |               |content      |between       |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |Intermediary|intercepting   |on           |content and   |       |
-   |    |            |secret         |Intermediary |secret, e.g.  |       |
-   |    |            |               |server       |secret sent   |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |server      |               |             |as URI        |       |
-   |    |            |               |             |fragment to   |       |
-   |    |            |               |             |recipient     |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |             |Optional      |       |
+   |3   |Content on  |Content        |Ability to   |1) Physical   |       |
+   |    |Intermediary|recovery by    |decrypt      |separation    |       |
+   |    |server      |intercepting   |content on   |between       |       |
+   |    |            |secret         |Intermediary |content and   |       |
+   |    |            |               |server       |secret, e.g.  |       |
+   |    |            |               |             |secret sent as|       |
+   |    |            |               |             |URI fragment  |       |
+   |    |            |               |             |to recipient, |       |
+   |    |            |               |             |2) Optional   |       |
    |    |            |               |             |second        |       |
    |    |            |               |             |factor(e.g.   |       |
    |    |            |               |             |Device PIN,   |       |
-   +----+------------+---------------+-------------+--------------+-------+
    |    |            |               |             |Activation    |       |
    |    |            |               |             |Options -     |       |
    |    |            |               |             |please refer  |       |
    |    |            |               |             |to CCC        |       |
-   +----+------------+---------------+-------------+--------------+-------+
    |    |            |               |             |Technical     |       |
    |    |            |               |             |Specification)|       |
    |    |            |               |             |can be        |       |
-   |    |            |               |             |propoused     |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |             |to the user   |       |
-   |    |            |               |             |via UI        |       |
+   |    |            |               |             |propoused to  |       |
+   |    |            |               |             |the user via  |       |
+   |    |            |               |             |UI            |       |
    |    |            |               |             |notification  |       |
    |    |            |               |             |based on      |       |
-   +----+------------+---------------+-------------+--------------+-------+
    |    |            |               |             |security      |       |
    |    |            |               |             |options of    |       |
    |    |            |               |             |selected      |       |
    |    |            |               |             |primary       |       |
-   +----+------------+---------------+-------------+--------------+-------+
    |    |            |               |             |sharing       |       |
    |    |            |               |             |channel (used |       |
-   |    |            |               |             |to share      |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |             |URL with      |       |
-   |    |            |               |             |secret)       |       |
+   |    |            |               |             |to share URL  |       |
+   |    |            |               |             |with secret)  |       |
    +----+------------+---------------+-------------+--------------+-------+
    |4   |Content on  |Accees to      |Adversary can|Mailboxes     |       |
    |    |            |content by     |go to partner|identified by |       |
