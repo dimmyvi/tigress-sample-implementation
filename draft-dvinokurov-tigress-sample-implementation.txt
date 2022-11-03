@@ -225,20 +225,21 @@ Table of Contents
    +====+============+===============+=============+==============+=======+
    |Item|Asset       |Threat         |Impact       |Mitigation    |Comment|
    +====+============+===============+=============+==============+=======+
-   |1   |Owner's DCK |Kicking-off    |DCK become   |User auth     |       |
+   |1   |Owner's DCK |Kicking-off    |- DCK become |User auth     |       |
    |    |            |arbitrary key  |shared with  |(face/touch   |       |
-   |    |            |sharing by     |arbitrary    |ID), Secure   |       |
+   |    |            |sharing by     |arbitrary    |ID), - Secure |       |
    |    |            |spoofing user  |user/        |Intent        |       |
    |    |            |identity       |adversary    |              |       |
    |    |            |               |allowing them|              |       |
    |    |            |               |access to the|              |       |
    |    |            |               |Owner's car  |              |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |2   |Content on  |Content        |Exposure of  |Strong source |       |
-   |    |Intermediary|recovery by    |encrypted    |of randomness |       |
-   |    |server      |brute forcing  |content and  |for salt, At  |       |
-   |    |            |secret         |key          |least 128 bit |       |
-   |    |            |               |redemption   |key lenght,   |       |
+   |2   |Content on  |Content        |Exposure of  |- Strong      |       |
+   |    |Intermediary|recovery by    |encrypted    |source of     |       |
+   |    |server      |brute forcing  |content and  |randomness for|       |
+   |    |            |secret         |key          |salt, - At    |       |
+   |    |            |               |redemption   |least 128 bit |       |
+   |    |            |               |             |key lenght, - |       |
    |    |            |               |             |Limitted TTL  |       |
    |    |            |               |             |of the mailbox|       |
    +----+------------+---------------+-------------+--------------+-------+
