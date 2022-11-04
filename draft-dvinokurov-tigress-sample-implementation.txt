@@ -222,120 +222,89 @@ Table of Contents
    sample-implementation/blob/main/threat_model.png "Threat model for
    Tigress sample implementation"
 
-   +====+============+===============+=============+================+=======+
-   |Item|Asset       |Threat         |Impact       |Mitigation      |Comment|
-   +====+============+===============+=============+================+=======+
-   |1   |Owner's DCK |Kicking-off    |DCK become   |1) User auth    |       |
-   |    |            |arbitrary key  |shared with  |(face/touch ID),|       |
-   |    |            |sharing by     |arbitrary    |2) Secure Intent|       |
-   |    |            |spoofing user  |user/        |                |       |
-   |    |            |identity       |adversary    |                |       |
-   |    |            |               |allowing them|                |       |
-   |    |            |               |access to the|                |       |
-   |    |            |               |Owner's car  |                |       |
-   +----+------------+---------------+-------------+----------------+-------+
-   |2   |Content on  |Content        |Exposure of  |1) Strong source|       |
-   |    |Intermediary|recovery by    |encrypted    |of randomness   |       |
-   |    |server      |brute forcing  |content and  |for salt, 2) At |       |
-   |    |            |secret         |key          |least 128 bit   |       |
-   |    |            |               |redemption   |key lenght, 3)  |       |
-   |    |            |               |             |Limitted TTL of |       |
-   |    |            |               |             |the mailbox     |       |
-   +----+------------+---------------+-------------+----------------+-------+
-   |3   |Content on  |Content        |Ability to   |1) Physical     |       |
-   |    |Intermediary|recovery by    |decrypt      |separation      |       |
-   |    |server      |intercepting   |content on   |between content |       |
-   |    |            |secret         |Intermediary |and secret, e.g.|       |
-   |    |            |               |server       |secret sent as  |       |
-   |    |            |               |             |URI fragment to |       |
-   |    |            |               |             |recipient, 2)   |       |
-   |    |            |               |             |Optional second |       |
-   |    |            |               |             |factor(e.g.     |       |
-   |    |            |               |             |Device PIN,     |       |
-   |    |            |               |             |Activation      |       |
-   |    |            |               |             |Options - please|       |
-   |    |            |               |             |refer to CCC    |       |
-   |    |            |               |             |Technical       |       |
-   |    |            |               |             |Specification)  |       |
-   |    |            |               |             |can be propoused|       |
-   |    |            |               |             |to the user via |       |
-   |    |            |               |             |UI notification |       |
-   |    |            |               |             |based on        |       |
-   |    |            |               |             |security options|       |
-   |    |            |               |             |of selected     |       |
-   |    |            |               |             |primary sharing |       |
-   |    |            |               |             |channel (used to|       |
-   |    |            |               |             |share URL with  |       |
-   |    |            |               |             |secret)         |       |
-   +----+------------+---------------+-------------+----------------+-------+
-   |4   |Content on  |Accees to      |1) Adversary |1) Mailboxes    |       |
-   |    |Intermediary|content by     |can go to    |identified by   |       |
-   |    |server      |multiple       |partner and  |version 4 UUID  |       |
-   |    |            |arbitrary      |redeem the   |defined in      |       |
-   |    |            |users/devices  |shared key,  |[RFC4122](hard  |       |
-   |    |            |               |2) Adversary |to guess/       |       |
-   |    |            |               |can send push|bruteforce), 2) |       |
-   |    |            |               |notifications|Mailboxes 'tied'|       |
-   |    |            |               |             |to sender and   |       |
-   |    |            |               |             |recipient (trust|       |
-   |    |            |               |             |on first use via|       |
-   |    |            |               |             |deviceClaim), 3)|       |
-   |    |            |               |             |TTL limit for   |       |
-   |    |            |               |             |mailboxes, 4)   |       |
-   |    |            |               |             |Mailboxes       |       |
-   |    |            |               |             |deleted after   |       |
-   |    |            |               |             |pass redemption |       |
-   +----+------------+---------------+-------------+----------------+-------+
-   |5   |Content on  |Compromised    |1) Adversary |1) Separation   |       |
-   |    |Intermediary|Intermediary   |can redeem   |between content |       |
-   |    |server      |server         |the          |and secret, e.g.|       |
-   |    |            |               |sharedKey, 2)|secret sent as  |       |
-   |    |            |               |Adversary can|URI fragment to |       |
-   |    |            |               |send push    |recipient, 2)   |       |
-   |    |            |               |notifications|TTL limit for   |       |
-   |    |            |               |             |mailboxes       |       |
-   +----+------------+---------------+-------------+----------------+-------+
-   |6   |Content on  |Unauthenticated|1) Adversary |1) Mailboxes    |       |
-   |    |Intermediary|access to      |can redeem   |identified by   |       |
-   |    |server and  |mailbox on     |the          |version 4 UUID  |       |
-   |    |Push Tokens |Intermediary   |sharedKey, 2)|defined in      |       |
-   |    |            |server         |Adversary can|[RFC4122](hard  |       |
-   |    |            |               |send push    |to guess/       |       |
-   |    |            |               |notifications|bruteforce), 2) |       |
-   |    |            |               |             |Mailboxes 'tied'|       |
-   |    |            |               |             |to sender and   |       |
-   |    |            |               |             |recipient (trust|       |
-   |    |            |               |             |on first use via|       |
-   |    |            |               |             |deviceClaim), 3)|       |
-   |    |            |               |             |TTL limit for   |       |
-   |    |            |               |             |mailboxes, 4)   |       |
-   |    |            |               |             |Mailboxes       |       |
-   |    |            |               |             |deleted after   |       |
-   |    |            |               |             |pass redemption |       |
-   +----+------------+---------------+-------------+----------------+-------+
-   |7   |Content on  |User stores    |Service      |1) Mailboxes    |       |
-   |    |Intermediary|non-credential |abuse,       |have size limit,|       |
-   |    |server      |information in |Adversary can|2) Mailboxes    |       |
-   |    |            |mailbox (e.g.  |use          |have TTL        |       |
-   |    |            |"cat pictures")|Intermediary |                |       |
-   |    |            |               |server as    |                |       |
-   |    |            |               |cloud storage|                |       |
-   +----+------------+---------------+-------------+----------------+-------+
-   |8   |Device PIN  |Receiver device|Device PIN   |Activation      |       |
-   |    |            |compromised    |can exposure |Options as      |       |
-   |    |            |(redemption    |and          |defined in *_CCC|       |
-   |    |            |before friend) |forwarding to|Digital Key     |       |
-   |    |            |               |an advarsary |Release 3,      |       |
-   |    |            |               |             |Technical       |       |
-   |    |            |               |             |Specification_*,|       |
-   |    |            |               |             |Section 11.2    |       |
-   |    |            |               |             |Sharing         |       |
-   |    |            |               |             |Principles,     |       |
-   |    |            |               |             |subsection      |       |
-   |    |            |               |             |11.2.1.3.       |       |
-   |    |            |               |             |Activation      |       |
-   |    |            |               |             |Options         |       |
-   +----+------------+---------------+-------------+----------------+-------+
+   +====+============+===============+=============+=========================+=======+
+   |Item|Asset       |Threat         |Impact       |Mitigation               |Comment|
+   +====+============+===============+=============+=========================+=======+
+   |1   |Owner's DCK |Kicking-off    |DCK become   |1) User auth (face/touch |       |
+   |    |            |arbitrary key  |shared with  |ID), 2) Secure Intent    |       |
+   |    |            |sharing by     |arbitrary    |                         |       |
+   |    |            |spoofing user  |user/        |                         |       |
+   |    |            |identity       |adversary    |                         |       |
+   |    |            |               |allowing them|                         |       |
+   |    |            |               |access to the|                         |       |
+   |    |            |               |Owner's car  |                         |       |
+   +----+------------+---------------+-------------+-------------------------+-------+
+   |2   |Content on  |Content        |Exposure of  |1) Strong source of      |       |
+   |    |Intermediary|recovery by    |encrypted    |randomness for salt, 2)  |       |
+   |    |server      |brute forcing  |content and  |At least 128 bit key     |       |
+   |    |            |secret         |key          |lenght, 3) Limitted TTL  |       |
+   |    |            |               |redemption   |of the mailbox           |       |
+   +----+------------+---------------+-------------+-------------------------+-------+
+   |3   |Content on  |Content        |Ability to   |1) Physical separation   |       |
+   |    |Intermediary|recovery by    |decrypt      |between content and      |       |
+   |    |server      |intercepting   |content on   |secret, e.g. secret sent |       |
+   |    |            |secret         |Intermediary |as URI fragment to       |       |
+   |    |            |               |server       |recipient, 2) Optional   |       |
+   |    |            |               |             |second factor(e.g.       |       |
+   |    |            |               |             |Device PIN, Activation   |       |
+   |    |            |               |             |Options - please refer to|       |
+   |    |            |               |             |CCC Technical            |       |
+   |    |            |               |             |Specification) can be    |       |
+   |    |            |               |             |propoused to the user via|       |
+   |    |            |               |             |UI notification based on |       |
+   |    |            |               |             |security options of      |       |
+   |    |            |               |             |selected primary sharing |       |
+   |    |            |               |             |channel (used to share   |       |
+   |    |            |               |             |URL with secret)         |       |
+   +----+------------+---------------+-------------+-------------------------+-------+
+   |4   |Content on  |Accees to      |1) Adversary |1) Mailboxes identified  |       |
+   |    |Intermediary|content by     |can go to    |by version 4 UUID defined|       |
+   |    |server      |multiple       |partner and  |in [RFC4122](hard to     |       |
+   |    |            |arbitrary      |redeem the   |guess/bruteforce), 2)    |       |
+   |    |            |users/devices  |shared key,  |Mailboxes 'tied' to      |       |
+   |    |            |               |2) Adversary |sender and recipient     |       |
+   |    |            |               |can send push|(trust on first use via  |       |
+   |    |            |               |notifications|deviceClaim), 3) TTL     |       |
+   |    |            |               |             |limit for mailboxes, 4)  |       |
+   |    |            |               |             |Mailboxes deleted after  |       |
+   |    |            |               |             |pass redemption          |       |
+   +----+------------+---------------+-------------+-------------------------+-------+
+   |5   |Content on  |Compromised    |1) Adversary |1) Separation between    |       |
+   |    |Intermediary|Intermediary   |can redeem   |content and secret, e.g. |       |
+   |    |server      |server         |the          |secret sent as URI       |       |
+   |    |            |               |sharedKey, 2)|fragment to recipient, 2)|       |
+   |    |            |               |Adversary can|TTL limit for mailboxes  |       |
+   |    |            |               |send push    |                         |       |
+   |    |            |               |notifications|                         |       |
+   +----+------------+---------------+-------------+-------------------------+-------+
+   |6   |Content on  |Unauthenticated|1) Adversary |1) Mailboxes identified  |       |
+   |    |Intermediary|access to      |can redeem   |by version 4 UUID defined|       |
+   |    |server and  |mailbox on     |the          |in [RFC4122](hard to     |       |
+   |    |Push Tokens |Intermediary   |sharedKey, 2)|guess/bruteforce), 2)    |       |
+   |    |            |server         |Adversary can|Mailboxes 'tied' to      |       |
+   |    |            |               |send push    |sender and recipient     |       |
+   |    |            |               |notifications|(trust on first use via  |       |
+   |    |            |               |             |deviceClaim), 3) TTL     |       |
+   |    |            |               |             |limit for mailboxes, 4)  |       |
+   |    |            |               |             |Mailboxes deleted after  |       |
+   |    |            |               |             |pass redemption          |       |
+   +----+------------+---------------+-------------+-------------------------+-------+
+   |7   |Content on  |User stores    |Service      |1) Mailboxes have size   |       |
+   |    |Intermediary|non-credential |abuse,       |limit, 2) Mailboxes have |       |
+   |    |server      |information in |Adversary can|TTL                      |       |
+   |    |            |mailbox (e.g.  |use          |                         |       |
+   |    |            |"cat pictures")|Intermediary |                         |       |
+   |    |            |               |server as    |                         |       |
+   |    |            |               |cloud storage|                         |       |
+   +----+------------+---------------+-------------+-------------------------+-------+
+   |8   |Device PIN  |Receiver device|Device PIN   |Activation Options as    |       |
+   |    |            |compromised    |can exposure |defined in               |       |
+   |    |            |(redemption    |and          |*_[CCC-Digital-Key-30]_*,|       |
+   |    |            |before friend) |forwarding to|Section 11.2 Sharing     |       |
+   |    |            |               |an advarsary |Principles, subsection   |       |
+   |    |            |               |             |11.2.1.3.  Activation    |       |
+   |    |            |               |             |Options                  |       |
+   +----+------------+---------------+-------------+-------------------------+-------+
 
                                   Table 1
 
@@ -348,6 +317,12 @@ Table of Contents
    This document has no IANA actions.
 
 7.  Normative References
+
+   [CCC-Digital-Key-30]
+              Car Connectivity Consortium, "Digital Key – The Future of
+              Vehicle Access", November 2021, <https://global-
+              carconnectivity.org/wp-content/uploads/2021/11/
+              CCC_Digital_Key_Whitepaper_Approved.pdf>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
