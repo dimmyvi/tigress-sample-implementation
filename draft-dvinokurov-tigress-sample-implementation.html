@@ -1422,6 +1422,38 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">Activation Options as defined in <span>[<a href="#CCC-Digital-Key-30" class="cite xref">CCC-Digital-Key-30</a>]</span>, Section 11.2 Sharing Principles, subsection 11.2.1.3. Activation Options</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">16</td>
+            <td class="text-left" rowspan="1" colspan="1">Sharing Invitation</td>
+            <td class="text-left" rowspan="1" colspan="1">User mistakenly shares with the wrong person</td>
+            <td class="text-left" rowspan="1" colspan="1">DCK redemption by adversary/not intended user</td>
+            <td class="text-left" rowspan="1" colspan="1">1) Send invitation and Device PIN via different channels, e.g. Device PIN can be shared out of band (over voice), 2) DCK revocation</td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">17</td>
+            <td class="text-left" rowspan="1" colspan="1">Sharing Invitation</td>
+            <td class="text-left" rowspan="1" colspan="1">Owner device compromise allow malware to forward invitation to an adversary</td>
+            <td class="text-left" rowspan="1" colspan="1">Share invitation forwarding and key redemption by malicious party</td>
+            <td class="text-left" rowspan="1" colspan="1">Activation Options as defined in <span>[<a href="#CCC-Digital-Key-30" class="cite xref">CCC-Digital-Key-30</a>]</span>, Section 11.2 Sharing Principles, subsection 11.2.1.3. Activation Options</td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">18</td>
+            <td class="text-left" rowspan="1" colspan="1">Sharing Invitation</td>
+            <td class="text-left" rowspan="1" colspan="1">Friend device OEM account take over</td>
+            <td class="text-left" rowspan="1" colspan="1">DCK provisioning on adversary's device</td>
+            <td class="text-left" rowspan="1" colspan="1">1) Binding to deviceClaim, 2) Device PIN shared out of band, 3) Activation Options as defined in <span>[<a href="#CCC-Digital-Key-30" class="cite xref">CCC-Digital-Key-30</a>]</span>, Section 11.2 Sharing Principles, subsection 11.2.1.3. Activation Options</td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">19</td>
+            <td class="text-left" rowspan="1" colspan="1">User's credentials, payment card details, etc</td>
+            <td class="text-left" rowspan="1" colspan="1">Phishing attacks leveraging malicious JS on landing page</td>
+            <td class="text-left" rowspan="1" colspan="1">1) Landing page URL fragement contains encryption key - meaning malicious JS could use key to decrypt contents, 2) Malicious JS can phish for user credentials, payment card information, or other sensitive data</td>
+            <td class="text-left" rowspan="1" colspan="1">1) Properly vet JS that is embeded on landing page, 2) Define strong content security policy</td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+          </tr>
         </tbody>
       </table>
 </section>

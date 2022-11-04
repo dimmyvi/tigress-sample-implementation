@@ -388,6 +388,54 @@ Table of Contents
    |    |            |an adversary   |malicious    |subsection 11.2.1.3. |               |
    |    |            |               |party        |Activation Options   |               |
    +----+------------+---------------+-------------+---------------------+---------------+
+   |16  |Sharing     |User mistakenly|DCK          |1) Send invitation   |               |
+   |    |Invitation  |shares with the|redemption by|and Device PIN via   |               |
+   |    |            |wrong person   |adversary/not|different channels,  |               |
+   |    |            |               |intended user|e.g.  Device PIN can |               |
+   |    |            |               |             |be shared out of band|               |
+   |    |            |               |             |(over voice), 2) DCK |               |
+   |    |            |               |             |revocation           |               |
+   +----+------------+---------------+-------------+---------------------+---------------+
+   |17  |Sharing     |Owner device   |Share        |Activation Options as|               |
+   |    |Invitation  |compromise     |invitation   |defined in           |               |
+   |    |            |allow malware  |forwarding   |[CCC-Digital-Key-30],|               |
+   |    |            |to forward     |and key      |Section 11.2 Sharing |               |
+   |    |            |invitation to  |redemption by|Principles,          |               |
+   |    |            |an adversary   |malicious    |subsection 11.2.1.3. |               |
+   |    |            |               |party        |Activation Options   |               |
+   +----+------------+---------------+-------------+---------------------+---------------+
+   |18  |Sharing     |Friend device  |DCK          |1) Binding to        |               |
+   |    |Invitation  |OEM account    |provisioning |deviceClaim, 2)      |               |
+   |    |            |take over      |on           |Device PIN shared out|               |
+   |    |            |               |adversary's  |of band, 3)          |               |
+   |    |            |               |device       |Activation Options as|               |
+   |    |            |               |             |defined in           |               |
+   |    |            |               |             |[CCC-Digital-Key-30],|               |
+   |    |            |               |             |Section 11.2 Sharing |               |
+   |    |            |               |             |Principles,          |               |
+   |    |            |               |             |subsection 11.2.1.3. |               |
+   |    |            |               |             |Activation Options   |               |
+   +----+------------+---------------+-------------+---------------------+---------------+
+   |19  |User's      |Phishing       |1) Landing   |1) Properly vet JS   |               |
+   |    |credentials,|attacks        |page URL     |that is embeded on   |               |
+   |    |payment card|leveraging     |fragement    |landing page, 2)     |               |
+   |    |details, etc|malicious JS on|contains     |Define strong content|               |
+   |    |            |landing page   |encryption   |security policy      |               |
+   |    |            |               |key - meaning|                     |               |
+   |    |            |               |malicious JS |                     |               |
+   |    |            |               |could use key|                     |               |
+   |    |            |               |to decrypt   |                     |               |
+   |    |            |               |contents, 2) |                     |               |
+   |    |            |               |Malicious JS |                     |               |
+   |    |            |               |can phish for|                     |               |
+   |    |            |               |user         |                     |               |
+   |    |            |               |credentials, |                     |               |
+   |    |            |               |payment card |                     |               |
+   |    |            |               |information, |                     |               |
+   |    |            |               |or other     |                     |               |
+   |    |            |               |sensitive    |                     |               |
+   |    |            |               |data         |                     |               |
+   +----+------------+---------------+-------------+---------------------+---------------+
 
                                   Table 1
 
