@@ -185,8 +185,8 @@ Threat model for the sample implementation is provided at the following URL:
 | 11    | Device PIN | PIN recovery via timing attack | Adversary with shared URL in possession can recover PIN based on the response delay, in the case where the PIN verification is not invariant | 1) Time invariant compare, 2) PIN retry counter/limit |  |
 | 12    | Device PIN retry counter/limit | Device PIN brute force | Device PIN successful guess | 1) Use of strong RNG as a source to generate Device PIN, 2) Long enough PIN (e.g. 6 digits) as per  {{NIST-800-63B}} reccomendations, 3) Limit numer of retries (e.g. DEvice PIN retry counter + limit) as per {{NIST-800-63B}} reccomendations | {{NIST-800-63B}}, section 5.1.1.1 Memorized Secret Authenticators |
 | 13    | Sharing Invitation | Messaging channel eavesdropping  | Share invitation forwarding and DCK redemtion by malicious party | 1) Send invitation and Device PIN via different channels, e.g. Device PIN can be shared out of band (over voice), 2) Use of E2E encrypted msg apps/chhannel |   |
-| 14    | Voluntary/Involuntary forwarding by Friend | DCK redemption before Friend | Use of messaging apps with anti-forwarding mechanisms(e.g. hide link, copy/past prevention) |   |
-| 15    | Friend device compromise allow malware to forward invitation to an adversary | Share invitation forwarding and key redemtion by malicious party | Activation Options as defined in {{CCC-Digital-Key-30}}, Section 11.2 Sharing Principles, subsection 11.2.1.3. Activation Options |   |
+| 14    | Sharing Invitation | Voluntary/Involuntary forwarding by Friend | DCK redemption before Friend | Use of messaging apps with anti-forwarding mechanisms(e.g. hide link, copy/past prevention) |   |
+| 15    | Sharing Invitation | Friend device compromise allow malware to forward invitation to an adversary | Share invitation forwarding and key redemtion by malicious party | Activation Options as defined in {{CCC-Digital-Key-30}}, Section 11.2 Sharing Principles, subsection 11.2.1.3. Activation Options |   |
 
 
 # Security Considerations
