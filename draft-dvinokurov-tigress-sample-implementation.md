@@ -82,6 +82,13 @@ normative:
     date: 2021-11
     target: https://global-carconnectivity.org/wp-content/uploads/2021/11/CCC_Digital_Key_Whitepaper_Approved.pdf
 
+  NIST-800-63B:
+    author:
+      org: NIST
+    title: "NIST Special Publication 800-63B, Digital Identity Guidelines"
+    date: 2022-11
+    target: https://pages.nist.gov/800-63-3/sp800-63b.html
+
 
 informative:
 
@@ -173,6 +180,10 @@ Threat model for the sample implementation is provided at the following URL:
 | 6    | Content on Intermediary server and Push Tokens | Unauthenticated access to mailbox on Intermediary server | 1) Adversary can redeem the sharedKey, 2) Adversary can send push notifications | 1) Mailboxes identified by version 4 UUID defined in {{!RFC4122}}(hard to guess/bruteforce), 2) Mailboxes 'tied' to sender and recipient (trust on first use via deviceClaim), 3) TTL limit for mailboxes, 4) Mailboxes deleted after pass redemption |   |
 | 7    | Content on Intermediary server | User stores non-credential information in mailbox (e.g. "cat pictures") | Service abuse, Adversary can use Intermediary server as cloud storage | 1) Mailboxes have size limit, 2) Mailboxes have TTL |   |
 | 8    | Device PIN | Receiver device compromised (redemption before friend) | Device PIN can exposure and forwarding to an advarsary | Activation Options as defined in {{CCC-Digital-Key-30}}, Section 11.2 Sharing Principles, subsection 11.2.1.3. Activation Options |    |
+| 9    | Device PIN | Weak PIN can be easily guessed | Anyone with share URL in their possession can guess the PIN and redeem the key | 1) Use of strong RNG as a source to generate Device PIN, 2) Long enough PIN (e.g. 6 digits) as per {{NIST-800-63B}} reccomendations, 3) Limit numer of retries (e.g. DEvice PIN retry counter + limit) as per {{NIST-800-63B}} reccomendations | {{NIST-800-63B}}, section 5.1.1.1 Memorized Secret Authenticators |
+| 10    | Device PIN | Eavesdropping on weak msg channels/app | PIN exposure would allow one with possession of share URL and Secret to redeem key | In person, out of band PIN trasfer, e.g. voice channel |  |
+| 11    | Device PIN | PIN recovery via timing attack | Adversary with shared URL in possession can recover PIN based on the response delay, in the case where the PIN verification is not invariant | 1) Time invariant compare, 2) PIN retry counter/limit |  |
+| 12    | Device PIN retry counter/limit | Device PIN brute force | Device PIN successful guess | 1) Use of strong RNG as a source to generate Device PIN, 2) Long enough PIN (e.g. 6 digits) as per  {{NIST-800-63B}} reccomendations, 3) Limit numer of retries (e.g. DEvice PIN retry counter + limit) as per {{NIST-800-63B}} reccomendations | {{NIST-800-63B}}, section 5.1.1.1 Memorized Secret Authenticators |  |
 
 
 # Security Considerations
