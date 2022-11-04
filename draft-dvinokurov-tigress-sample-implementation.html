@@ -1304,8 +1304,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">1</td>
             <td class="text-left" rowspan="1" colspan="1">Owner's DCK</td>
             <td class="text-left" rowspan="1" colspan="1">Kicking-off arbitrary key sharing by spoofing user identity</td>
-            <td class="text-left" rowspan="1" colspan="1">1) DCK become shared with arbitrary user/adversary allowing them access to the Owner's car</td>
-            <td class="text-left" rowspan="1" colspan="1">User auth (face/touch ID), 2) Secure Intent</td>
+            <td class="text-left" rowspan="1" colspan="1">DCK become shared with arbitrary user/adversary allowing them access to the Owner's car</td>
+            <td class="text-left" rowspan="1" colspan="1">1) User auth (face/touch ID), 2) Secure Intent</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
@@ -1328,7 +1328,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">4</td>
             <td class="text-left" rowspan="1" colspan="1">Content on Intermediary server</td>
             <td class="text-left" rowspan="1" colspan="1">Accees to content by multiple arbitrary  users/devices</td>
-            <td class="text-left" rowspan="1" colspan="1">Adversary can go to partner and redeem the shared key, Adversary can send push notifications</td>
+            <td class="text-left" rowspan="1" colspan="1">1) Adversary can go to partner and redeem the shared key, 2) Adversary can send push notifications</td>
             <td class="text-left" rowspan="1" colspan="1">1) Mailboxes identified by version 4 UUID defined in <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span>(hard to guess/bruteforce), 2) Mailboxes 'tied' to sender and recipient (trust on first use via deviceClaim), 3) TTL limit for mailboxes, 4) Mailboxes deleted after pass redemption</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
@@ -1336,7 +1336,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">5</td>
             <td class="text-left" rowspan="1" colspan="1">Content on Intermediary server</td>
             <td class="text-left" rowspan="1" colspan="1">Compromised Intermediary server</td>
-            <td class="text-left" rowspan="1" colspan="1">Adversary can redeem the sharedKey, Adversary can send push notifications</td>
+            <td class="text-left" rowspan="1" colspan="1">1) Adversary can redeem the sharedKey, 2) Adversary can send push notifications</td>
             <td class="text-left" rowspan="1" colspan="1">1) Separation between content and secret, e.g. secret sent as URI fragment to recipient, 2) TTL limit for mailboxes</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
@@ -1344,7 +1344,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">6</td>
             <td class="text-left" rowspan="1" colspan="1">Content on Intermediary server and Push Tokens</td>
             <td class="text-left" rowspan="1" colspan="1">Unauthenticated access to mailbox on Intermediary server</td>
-            <td class="text-left" rowspan="1" colspan="1">Adversary can redeem the sharedKey, Adversary can send push notifications</td>
+            <td class="text-left" rowspan="1" colspan="1">1) Adversary can redeem the sharedKey, 2) Adversary can send push notifications</td>
             <td class="text-left" rowspan="1" colspan="1">1) Mailboxes identified by version 4 UUID defined in <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span>(hard to guess/bruteforce), 2) Mailboxes 'tied' to sender and recipient (trust on first use via deviceClaim), 3) TTL limit for mailboxes, 4) Mailboxes deleted after pass redemption</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
@@ -1354,6 +1354,14 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">User stores non-credential information in mailbox (e.g. "cat pictures")</td>
             <td class="text-left" rowspan="1" colspan="1">Service abuse, Adversary can use Intermediary server as cloud storage</td>
             <td class="text-left" rowspan="1" colspan="1">1) Mailboxes have size limit, 2) Mailboxes have TTL</td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">8</td>
+            <td class="text-left" rowspan="1" colspan="1">Device PIN</td>
+            <td class="text-left" rowspan="1" colspan="1">Receiver device compromised (redemption before friend)</td>
+            <td class="text-left" rowspan="1" colspan="1">Device PIN can exposure and forwarding to an advarsary</td>
+            <td class="text-left" rowspan="1" colspan="1">Activation Options as defined in <strong><em>CCC Digital Key Release 3, Technical Specification</em></strong>, Section 11.2 Sharing Principles, subsection 11.2.1.3. Activation Options</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
         </tbody>
