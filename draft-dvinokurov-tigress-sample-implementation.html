@@ -1297,7 +1297,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <th class="text-left" rowspan="1" colspan="1">Impact</th>
             <th class="text-left" rowspan="1" colspan="1">Mitigation</th>
             <th class="text-left" rowspan="1" colspan="1">Comment</th>
-            <th class="text-left" rowspan="1" colspan="1"> </th>
           </tr>
         </thead>
         <tbody>
@@ -1308,7 +1307,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">DCK become shared with arbitrary user/adversary allowing them access to the Owner's car</td>
             <td class="text-left" rowspan="1" colspan="1">1) User auth (face/touch ID), 2) Secure Intent</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">2</td>
@@ -1316,7 +1314,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">Content recovery by brute forcing secret</td>
             <td class="text-left" rowspan="1" colspan="1">Exposure of encrypted content and key redemption</td>
             <td class="text-left" rowspan="1" colspan="1">1) Strong source of randomness for salt, 2) At least 128 bit key lenght, 3) Limitted TTL of the mailbox</td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
@@ -1326,7 +1323,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">Ability to decrypt content on Intermediary server</td>
             <td class="text-left" rowspan="1" colspan="1">1) Physical separation between content and secret, e.g. secret sent as URI fragment to recipient, 2) Optional second factor(e.g. Device PIN, Activation Options - please refer to CCC Technical Specification) can be propoused to the user via UI notification based on security options of selected primary sharing channel (used to share URL with secret)</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">4</td>
@@ -1334,7 +1330,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">Accees to content by multiple arbitrary  users/devices</td>
             <td class="text-left" rowspan="1" colspan="1">1) Adversary can go to partner and redeem the shared key, 2) Adversary can send push notifications</td>
             <td class="text-left" rowspan="1" colspan="1">1) Mailboxes identified by version 4 UUID defined in <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span>(hard to guess/bruteforce), 2) Mailboxes 'tied' to sender and recipient (trust on first use via deviceClaim), 3) TTL limit for mailboxes, 4) Mailboxes deleted after pass redemption</td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
@@ -1344,7 +1339,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">1) Adversary can redeem the sharedKey, 2) Adversary can send push notifications</td>
             <td class="text-left" rowspan="1" colspan="1">1) Separation between content and secret, e.g. secret sent as URI fragment to recipient, 2) TTL limit for mailboxes</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">6</td>
@@ -1352,7 +1346,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">Unauthenticated access to mailbox on Intermediary server</td>
             <td class="text-left" rowspan="1" colspan="1">1) Adversary can redeem the sharedKey, 2) Adversary can send push notifications</td>
             <td class="text-left" rowspan="1" colspan="1">1) Mailboxes identified by version 4 UUID defined in <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span>(hard to guess/bruteforce), 2) Mailboxes 'tied' to sender and recipient (trust on first use via deviceClaim), 3) TTL limit for mailboxes, 4) Mailboxes deleted after pass redemption</td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
@@ -1362,7 +1355,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">Service abuse, Adversary can use Intermediary server as cloud storage</td>
             <td class="text-left" rowspan="1" colspan="1">1) Mailboxes have size limit, 2) Mailboxes have TTL</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">8</td>
@@ -1370,7 +1362,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">Receiver device compromised (redemption before friend)</td>
             <td class="text-left" rowspan="1" colspan="1">Device PIN can exposure and forwarding to an advarsary</td>
             <td class="text-left" rowspan="1" colspan="1">Activation Options as defined in <span>[<a href="#CCC-Digital-Key-30" class="cite xref">CCC-Digital-Key-30</a>]</span>, Section 11.2 Sharing Principles, subsection 11.2.1.3. Activation Options</td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
@@ -1381,7 +1372,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">1) Use of strong RNG as a source to generate Device PIN, 2) Long enough PIN (e.g. 6 digits) as per <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span> reccomendations, 3) Limit numer of retries (e.g. DEvice PIN retry counter + limit) as per <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span> reccomendations</td>
             <td class="text-left" rowspan="1" colspan="1">
               <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span>, section 5.1.1.1 Memorized Secret Authenticators</td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">10</td>
@@ -1390,7 +1380,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">PIN exposure would allow one with possession of share URL and Secret to redeem key</td>
             <td class="text-left" rowspan="1" colspan="1">In person, out of band PIN trasfer, e.g. voice channel</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">11</td>
@@ -1398,7 +1387,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">PIN recovery via timing attack</td>
             <td class="text-left" rowspan="1" colspan="1">Adversary with shared URL in possession can recover PIN based on the response delay, in the case where the PIN verification is not invariant</td>
             <td class="text-left" rowspan="1" colspan="1">1) Time invariant compare, 2) PIN retry counter/limit</td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
@@ -1409,6 +1397,29 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">1) Use of strong RNG as a source to generate Device PIN, 2) Long enough PIN (e.g. 6 digits) as per  <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span> reccomendations, 3) Limit numer of retries (e.g. DEvice PIN retry counter + limit) as per <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span> reccomendations</td>
             <td class="text-left" rowspan="1" colspan="1">
               <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span>, section 5.1.1.1 Memorized Secret Authenticators</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">13</td>
+            <td class="text-left" rowspan="1" colspan="1">Sharing Invitation</td>
+            <td class="text-left" rowspan="1" colspan="1">Messaging channel eavesdropping</td>
+            <td class="text-left" rowspan="1" colspan="1">Share invitation forwarding and DCK redemtion by malicious party</td>
+            <td class="text-left" rowspan="1" colspan="1">1) Send invitation and Device PIN via different channels, e.g. Device PIN can be shared out of band (over voice), 2) Use of E2E encrypted msg apps/chhannel</td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">14</td>
+            <td class="text-left" rowspan="1" colspan="1">Voluntary/Involuntary forwarding by Friend</td>
+            <td class="text-left" rowspan="1" colspan="1">DCK redemption before Friend</td>
+            <td class="text-left" rowspan="1" colspan="1">Use of messaging apps with anti-forwarding mechanisms(e.g. hide link, copy/past prevention)</td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">15</td>
+            <td class="text-left" rowspan="1" colspan="1">Friend device compromise allow malware to forward invitation to an adversary</td>
+            <td class="text-left" rowspan="1" colspan="1">Share invitation forwarding and key redemtion by malicious party</td>
+            <td class="text-left" rowspan="1" colspan="1">Activation Options as defined in <span>[<a href="#CCC-Digital-Key-30" class="cite xref">CCC-Digital-Key-30</a>]</span>, Section 11.2 Sharing Principles, subsection 11.2.1.3. Activation Options</td>
+            <td class="text-left" rowspan="1" colspan="1"> </td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
         </tbody>
