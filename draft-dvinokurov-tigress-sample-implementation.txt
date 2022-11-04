@@ -5,11 +5,11 @@
 Tigress                                                     D. Vinokurov
 Internet-Draft                                               A. Bulgakov
 Intended status: Informational                              J. L. Giraud
-Expires: 7 May 2023                                             C. Astiz
+Expires: 8 May 2023                                             C. Astiz
                                                             A. Pelletier
                                                                J. Hansen
                                                                Apple Inc
-                                                         3 November 2022
+                                                         4 November 2022
 
 
 Transfer Digital Credentials Securely: sample implementation and threat
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 May 2023.
+   This Internet-Draft will expire on 8 May 2023.
 
 Copyright Notice
 
@@ -276,84 +276,65 @@ Table of Contents
    |    |            |               |             |to share URL  |       |
    |    |            |               |             |with secret)  |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |4   |Content on  |Accees to      |Adversary can|Mailboxes     |       |
-   |    |            |content by     |go to partner|identified by |       |
-   |    |            |               |and          |version 4 UUID|       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |Intermediary|multiple       |redeem the   |defined in    |       |
-   |    |            |arbitrary      |shared key   |[RFC4122](hard|       |
-   |    |            |               |             |to guess)     |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |server      |users/devices  |Adversary can|Mailboxes     |       |
-   |    |            |               |send push    |'tied' to     |       |
+   |4   |Content on  |Accees to      |Adversary can|1) Mailboxes  |       |
+   |    |Intermediary|content by     |go to partner|identified by |       |
+   |    |server      |multiple       |and redeem   |version 4 UUID|       |
+   |    |            |arbitrary      |the shared   |defined in    |       |
+   |    |            |users/devices  |key,         |[RFC4122](hard|       |
+   |    |            |               |Adversary can|to guess/     |       |
+   |    |            |               |send push    |bruteforce),  |       |
+   |    |            |               |notifications|2) Mailboxes  |       |
+   |    |            |               |             |'tied' to     |       |
    |    |            |               |             |sender and    |       |
    |    |            |               |             |recipient     |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |notifications|(trust on     |       |
+   |    |            |               |             |(trust on     |       |
    |    |            |               |             |first use via |       |
-   |    |            |               |             |deviceClaim)  |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |             |TTL limit for |       |
-   |    |            |               |             |mailboxes     |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |             |Mailboxes     |       |
+   |    |            |               |             |deviceClaim), |       |
+   |    |            |               |             |3) TTL limit  |       |
+   |    |            |               |             |for mailboxes,|       |
+   |    |            |               |             |4) Mailboxes  |       |
    |    |            |               |             |deleted after |       |
    |    |            |               |             |pass          |       |
    |    |            |               |             |redemption    |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |5   |Content on  |Compromised    |Adversary can|Separation    |       |
-   |    |            |               |redeem the   |between       |       |
-   |    |            |               |sharedKey    |content and   |       |
-   |    |            |               |             |secret,       |       |
+   |5   |Content on  |Compromised    |Adversary can|1) Separation |       |
+   |    |Intermediary|Intermediary   |redeem the   |between       |       |
+   |    |server      |server         |sharedKey,   |content and   |       |
+   |    |            |               |Adversary can|secret, e.g.  |       |
+   |    |            |               |send push    |secret sent as|       |
+   |    |            |               |notifications|URI fragment  |       |
+   |    |            |               |             |to recipient, |       |
+   |    |            |               |             |2) TTL limit  |       |
+   |    |            |               |             |for mailboxes |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |    |Intermediary|Intermediary   |             |e.g. secret   |       |
-   |    |            |server         |             |sent as URI   |       |
-   |    |            |               |             |fragment      |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |server      |               |Adversary can|to recipient  |       |
-   |    |            |               |send push    |              |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |notifications|TTL limit for |       |
-   |    |            |               |             |mailboxes     |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |6   |Content on  |Unauthenticated|Adversary can|Mailboxes     |       |
-   |    |            |access         |redeem the   |identified by |       |
-   |    |            |               |sharedKey    |version 4 UUID|       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |Intermediary|to mailbox on  |             |defined in    |       |
-   |    |            |               |             |[RFC4122](hard|       |
-   |    |            |               |             |to guess)     |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |server and  |Intermediary   |Adversary can|Mailboxes     |       |
-   |    |            |server         |send push    |'tied' to     |       |
+   |6   |Content on  |Unauthenticated|Adversary can|1) Mailboxes  |       |
+   |    |Intermediary|access to      |redeem the   |identified by |       |
+   |    |server and  |mailbox on     |sharedKey,   |version 4 UUID|       |
+   |    |Push Tokens |Intermediary   |Adversary can|defined in    |       |
+   |    |            |server         |send push    |[RFC4122](hard|       |
+   |    |            |               |notifications|to guess/     |       |
+   |    |            |               |             |bruteforce),  |       |
+   |    |            |               |             |2) Mailboxes  |       |
+   |    |            |               |             |'tied' to     |       |
    |    |            |               |             |sender and    |       |
    |    |            |               |             |recipient     |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |Push Tokens |               |notifications|(trust on     |       |
+   |    |            |               |             |(trust on     |       |
    |    |            |               |             |first use via |       |
-   |    |            |               |             |deviceClaim)  |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |             |TTL limit for |       |
-   |    |            |               |             |mailboxes     |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |            |               |             |Mailboxes     |       |
+   |    |            |               |             |deviceClaim), |       |
+   |    |            |               |             |3) TTL limit  |       |
+   |    |            |               |             |for mailboxes,|       |
+   |    |            |               |             |4) Mailboxes  |       |
    |    |            |               |             |deleted after |       |
    |    |            |               |             |pass          |       |
    |    |            |               |             |redemption    |       |
    +----+------------+---------------+-------------+--------------+-------+
-   |7   |Content on  |User stores    |Service      |Mailboxes have|       |
-   |    |            |               |abuse,       |size limit    |       |
-   |    |            |               |Adversary can|              |       |
-   |    |            |               |use          |              |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |Intermediary|non-credential |Intermediary |Mailboxes have|       |
-   |    |            |               |server       |TTL           |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |server      |information in |as cloud     |              |       |
-   |    |            |mailbox        |storage      |              |       |
-   +----+------------+---------------+-------------+--------------+-------+
-   |    |            |(e.g. "cat     |             |              |       |
-   |    |            |pictures")     |             |              |       |
+   |7   |Content on  |User stores    |Service      |1) Mailboxes  |       |
+   |    |Intermediary|non-credential |abuse,       |have size     |       |
+   |    |server      |information in |Adversary can|limit, 2)     |       |
+   |    |            |mailbox (e.g.  |use          |Mailboxes have|       |
+   |    |            |"cat pictures")|Intermediary |TTL           |       |
+   |    |            |               |server as    |              |       |
+   |    |            |               |cloud storage|              |       |
    +----+------------+---------------+-------------+--------------+-------+
 
                                   Table 1
