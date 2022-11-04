@@ -163,7 +163,7 @@ Threat model for the sample implementation is provided at the following URL:
  5    | Content on Intermediary server | Compromised Intermediary server |Adversary can redeem the sharedKey, Adversary can send push notifications | 1) Separation between content and secret, e.g. secret sent as URI fragment to recipient, 2) TTL limit for mailboxes |         |
 | 6    | Content on Intermediary server and Push Tokens | Unauthenticated access to mailbox on Intermediary server | Adversary can redeem the sharedKey, Adversary can send push notifications | 1) Mailboxes identified by version 4 UUID defined in {{!RFC4122}}(hard to guess/bruteforce), 2) Mailboxes 'tied' to sender and recipient (trust on first use via deviceClaim), 3) TTL limit for mailboxes, 4) Mailboxes deleted after pass redemption |         |
 | 7    | Content on Intermediary server | User stores non-credential information in mailbox (e.g. "cat pictures") | Service abuse, Adversary can use Intermediary server as cloud storage | 1) Mailboxes have size limit, 2) Mailboxes have TTL |         |
--------+------------+------------------------+----------------------------------+------------------------------------------+---------|
+
 
 # Security Considerations
 
