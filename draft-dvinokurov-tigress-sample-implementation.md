@@ -74,6 +74,15 @@ normative:
     date: 2022-09
     target: https://datatracker.ietf.org/doc/draft-art-tigress/
 
+
+  CCC-Digital-Key-30:
+    author:
+      org: Car Connectivity Consortium
+    title: "Digital Key – The Future of Vehicle Access"
+    date: 2021-11
+    target: https://global-carconnectivity.org/wp-content/uploads/2021/11/CCC_Digital_Key_Whitepaper_Approved.pdf
+
+
 informative:
 
 
@@ -163,7 +172,7 @@ Threat model for the sample implementation is provided at the following URL:
  5    | Content on Intermediary server | Compromised Intermediary server | 1) Adversary can redeem the sharedKey, 2) Adversary can send push notifications | 1) Separation between content and secret, e.g. secret sent as URI fragment to recipient, 2) TTL limit for mailboxes |    |
 | 6    | Content on Intermediary server and Push Tokens | Unauthenticated access to mailbox on Intermediary server | 1) Adversary can redeem the sharedKey, 2) Adversary can send push notifications | 1) Mailboxes identified by version 4 UUID defined in {{!RFC4122}}(hard to guess/bruteforce), 2) Mailboxes 'tied' to sender and recipient (trust on first use via deviceClaim), 3) TTL limit for mailboxes, 4) Mailboxes deleted after pass redemption |   |
 | 7    | Content on Intermediary server | User stores non-credential information in mailbox (e.g. "cat pictures") | Service abuse, Adversary can use Intermediary server as cloud storage | 1) Mailboxes have size limit, 2) Mailboxes have TTL |   |
-| 8    | Device PIN | Receiver device compromised (redemption before friend) | Device PIN can exposure and forwarding to an advarsary | Activation Options as defined in ***CCC Digital Key Release 3, Technical Specification***, Section 11.2 Sharing Principles, subsection 11.2.1.3. Activation Options |    |
+| 8    | Device PIN | Receiver device compromised (redemption before friend) | Device PIN can exposure and forwarding to an advarsary | Activation Options as defined in ***{{CCC-Digital-Key-30}}***, Section 11.2 Sharing Principles, subsection 11.2.1.3. Activation Options |    |
 
 
 # Security Considerations
