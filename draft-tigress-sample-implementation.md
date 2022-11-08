@@ -102,7 +102,7 @@ This document describes a sample implementation of Tigress internet draft {{Tigr
 
 # Introduction
 
-This document provides a sample implementation and threat model for it.
+This document provides a sample implementation and threat model for Tigress draft {{Tigress-00}}.
 
 
 # Conventions and Definitions
