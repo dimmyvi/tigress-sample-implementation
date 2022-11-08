@@ -89,6 +89,13 @@ normative:
     date: 2022-11
     target: https://pages.nist.gov/800-63-3/sp800-63b.html
 
+  WebAuthn-2: 
+    author:
+      org: W3
+    title: "Web Authentication - An API for accessing Public Key Credentials - Level 2"
+    date: 2021-04
+    target: https://www.w3.org/TR/webauthn-2/
+
 
 informative:
 
@@ -112,20 +119,25 @@ This document provides a sample implementation and threat model for Tigress draf
 - DCK - Digital Car Key
 - AP - Application Processor
 - TTL - Time To Live
+- AAA - Apple Anonymous Attestation - a subtype of WebAuthn {{WebAuthn-2}}
+- PKI - public Key Infrastructure
+- UUID - a unique identifier defined in {{!RFC4122}} 
+- SMS - Short Message Service
+- OS - Operating System
 
-# Sample Implementation - Digital CarKey sharing example.
+# Sample Implementation - Digital Car Key sharing example.
 
-- An owner device (Sender) starts sharing flow with selection of credential entitlements for the key shared - e.g. access entitlements (allow open the car, allow start the engine, allow to drive the car), time of sharing - e.g. from 09/01/2022 to 09/03/2022, then generates a KeyCreationRequest (per CCC spec).
+- An owner device (Sender) starts sharing flow with selection of credential entitlements for the key shared - e.g. access entitlements (allow open the car, allow start the engine, allow to drive the car), time of sharing - e.g. from 09/01/2022 to 09/03/2022, then generates a KeyCreationRequest (per {{CCC-Digital-Key-30}} ).
 
-- The owner device generates a new symmetric encryption key (Secret) and encrypts the data. Then generates an attestation blob, that follows a WebAuthn API, specific to Apple - AAA (Apple Anonymous Attestation), which covers the encrypted content. Owner device makes a call to Relay server (Intermediary) - createMailbox, passing over the encrypted content, device attestation, mailbox configuration (mailbox time-to-live, access rights - RWD), preview (display information) details, it’s push notification token and a unique deviceClaim.
+- The owner device generates a new symmetric encryption key (Secret) and encrypts the data of KeyCreationRequest. Then generates an attestation data, that follows a WebAuthn API {{WebAuthn-2}}, specific to Apple - AAA, which covers the encrypted content. Owner device makes a call to Relay server (Intermediary) - createMailbox, passing over the encrypted content, device attestation, mailbox configuration (mailbox time-to-live, access rights - Read/Write/Delete), preview (display information) details, its push notification token and a unique deviceClaim.
 
-- Relay server verifies device attestation using WebAuthn verification rules specific to AAA, including verifying device PKI certificate in attestation blob. Relay server creates a mailbox, using mailboxConfiguration received in the request and stores encrypted content in it.
+- Relay server verifies device attestation using WebAuthn verification rules specific to attestation data used, including verifying device PKI certificate in attestation blob. Relay server creates a mailbox, using mailboxConfiguration received in the request and stores encrypted content in it.
 
-- The mailbox has a time-to-live, time, when it is to expire and be deleted by the Relay server. This time is limited by the value that can be considered both sufficient to complete the transfer and secure to against brute force attacks on the encrypted content the content - e.g. 48 hours.
+- The mailbox has a time-to-live which defines when it is to expire and be deleted by the Relay server. This time is limited by the value that can be considered both sufficient to complete the transfer and secure to against brute force attacks on the encrypted content - e.g. 48 hours.
 
-- Relay server generates a unique mailboxIdentifier value, that is hard to predict - e.g. using GUID - and builds a full URL (shareURL) referencing the mailbox - e.g. "www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002", which it returns to the Owner device.
+- Relay server generates a unique mailboxIdentifier value, that is hard to predict - e.g. using UUID - and builds a full URL (shareURL) referencing the mailbox - e.g. "https://www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002", which it returns to the Owner device.
 
-- Owner device locally stores the shareURL and the Secret and sends the shareURL with optional vertical in URL parameter and mandatory secret in Fragment part (e.g. "www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002?v=c#hXlr6aRC7KgJpOLTNZaLsw==") to the Friend’s device (Receiver) over SMS.
+- Owner device locally stores the shareURL and the Secret and sends the shareURL with optional vertical in URL parameter and mandatory secret in Fragment part (e.g. "https://www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002?v=c#hXlr6aRC7KgJpOLTNZaLsw==") to the Friend’s device (Receiver) over SMS.
 
 - Friend device receives the shareURL in SMS, messaging application makes an automatic GET call to shareURL (excluding Fragment part - Secret) - and fetches a preview (Display Information) html page with OpenGraph tags in the head:
 
@@ -144,11 +156,11 @@ This document provides a sample implementation and threat model for Tigress draf
 ~~~
 {: #opengraph-preview-example title="OpenGraph preview of a credential"}
 
-- Messaging application shows the user a preview of the carKey that Owner wants to share with them. User accepts the shareURL by clicking on the preview in the messaging application. Messaging application redirects the user to wallet (credential manager application) using a deep link mechanism embedded into the OS.
+- Messaging application shows the a preview of the DCK on the Friend's device that Owner wants to share with them. User accepts the shareURL by clicking on the preview in the messaging application. Messaging application redirects the user to wallet (credential manager application) using a deep link mechanism embedded into the OS.
 
 - Wallet receives the shareURL with the Secret in the Fragment. Friend device checks if the Relay server is in allow-list of accepted Relay servers.
 
-- Wallet reads secure content from the mailbox using shareURL (without the Fragment part) with HTTP POST method, passing a unique deviceClaim with the request. Relay server binds the mailbox (identified by mailboxIdentifier) with the Owner device (with Owner device deviceClaim) and the Friend device (with Friend device deviceClaim). Now only these 2 devices are allowed to read and write secure content to this particular mailbox. This secures the message exchange and prevents other devices from altering the exchange between Owner and Friend.
+- Wallet reads secure content from the mailbox using shareURL (without the Fragment part) with ReadSecureContentFromMailbox method, passing a unique deviceClaim with the request. Relay server binds the mailbox (identified by mailboxIdentifier) with the Owner device (with Owner device deviceClaim) and the Friend device (with Friend device deviceClaim). Now only these 2 devices are allowed to read and write secure content to this particular mailbox. This secures the message exchange and prevents other devices from altering the exchange between Owner and Friend.
 
 - Friend’s device decrypts secure content using Secret and extracts KeyCreationRequest (ref to CCC specification).
 
@@ -156,7 +168,7 @@ This document provides a sample implementation and threat model for Tigress draf
 
 - Relay server sends a push notification to Owner’s device via Push Notification Server.
 
--  Owner device, having received a push notification message,  reads secure content from the mailbox using shareURL with HTTP POST method, passing its unique deviceClaim with the request. Owner device decrypts secure content using Secret and extracts KeySigningRequest (ref to CCC specification).
+-  Owner device, having received a push notification message,  reads secure content from the mailbox using shareURL with ReadSecureContentFromMailbox method, passing its unique deviceClaim with the request. Owner device decrypts secure content using Secret and extracts KeySigningRequest (ref to CCC specification).
 
 -  Owner device signs the Friend’s device public key with Owner’s private key and creates a KeyImportRequest (ref to CCC specification). Owner device encrypts it with the Secret and uploads to the mailbox with with UpdateMailbox call to Relay server, providing its unique deviceClaim.
 
