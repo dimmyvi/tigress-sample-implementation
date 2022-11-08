@@ -95,7 +95,7 @@ informative:
 
 --- abstract
 
-This document describes a sample implementation and its threat model of the secure transfer of digital credentials (Tigress) solution of the corresponding Tigress Internet-draft {{Tigress-00}}.
+This document describes a sample implementation of Tigress internet draft {{Tigress-00}} and a threat model of this implementation.
 
 
 --- middle
