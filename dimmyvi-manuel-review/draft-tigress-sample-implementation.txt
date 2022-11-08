@@ -80,7 +80,7 @@ Table of Contents
 1.  Introduction
 
    This document provides a sample implementation and threat model for
-   it.
+   Tigress draft [Tigress-00].
 
 2.  Conventions and Definitions
 
