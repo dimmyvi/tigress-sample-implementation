@@ -1044,7 +1044,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Vinokurov, et al.</td>
-<td class="center">Expires 12 May 2023</td>
+<td class="center">Expires 13 May 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1057,12 +1057,12 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-tigress-sample-implementation-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-11-08" class="published">8 November 2022</time>
+<time datetime="2022-11-09" class="published">9 November 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-05-12">12 May 2023</time></dd>
+<dd class="expires"><time datetime="2023-05-13">13 May 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1127,7 +1127,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 12 May 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 May 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1163,7 +1163,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-sample-implementation-digit" class="internal xref">Sample Implementation - Digital CarKey sharing example.</a></p>
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-sample-implementation-digit" class="internal xref">Sample Implementation - Digital Car Key sharing example.</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-threat-model" class="internal xref">Threat Model</a></p>
@@ -1211,26 +1211,40 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </li>
         <li class="normal" id="section-2-2.3">TTL - Time To Live<a href="#section-2-2.3" class="pilcrow">¶</a>
 </li>
+        <li class="normal" id="section-2-2.4">AAA - Apple Anonymous Attestation - a subtype of WebAuthn <span>[<a href="#WebAuthn-2" class="cite xref">WebAuthn-2</a>]</span><a href="#section-2-2.4" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-2.5">PKI - public Key Infrastructure<a href="#section-2-2.5" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-2.6">UUID - a unique identifier defined in <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span><a href="#section-2-2.6" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-2.7">SMS - Short Message Service<a href="#section-2-2.7" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-2.8">OS - Operating System<a href="#section-2-2.8" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-2.9">URI - Uniform Resource Identifier<a href="#section-2-2.9" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-2.10">RNG - Random Number Generator<a href="#section-2-2.10" class="pilcrow">¶</a>
+</li>
       </ul>
 </section>
 </div>
-<div id="sample-implementation-digital-carkey-sharing-example">
+<div id="sample-implementation-digital-car-key-sharing-example">
 <section id="section-3">
       <h2 id="name-sample-implementation-digit">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-sample-implementation-digit" class="section-name selfRef">Sample Implementation - Digital CarKey sharing example.</a>
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-sample-implementation-digit" class="section-name selfRef">Sample Implementation - Digital Car Key sharing example.</a>
       </h2>
 <ul class="normal">
-<li class="normal" id="section-3-1.1">An owner device (Sender) starts sharing flow with selection of credential entitlements for the key shared - e.g. access entitlements (allow open the car, allow start the engine, allow to drive the car), time of sharing - e.g. from 09/01/2022 to 09/03/2022, then generates a KeyCreationRequest (per CCC spec).<a href="#section-3-1.1" class="pilcrow">¶</a>
+<li class="normal" id="section-3-1.1">An owner device (Sender) starts sharing flow with selection of credential entitlements for the key shared - e.g. access entitlements (allow open the car, allow start the engine, allow to drive the car), time of sharing - e.g. from 09/01/2022 to 09/03/2022, then generates a KeyCreationRequest (per <span>[<a href="#CCC-Digital-Key-30" class="cite xref">CCC-Digital-Key-30</a>]</span> ).<a href="#section-3-1.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.2">The owner device generates a new symmetric encryption key (Secret) and encrypts the data. Then generates an attestation blob, that follows a WebAuthn API, specific to Apple - AAA (Apple Anonymous Attestation), which covers the encrypted content. Owner device makes a call to Relay server (Intermediary) - createMailbox, passing over the encrypted content, device attestation, mailbox configuration (mailbox time-to-live, access rights - RWD), preview (display information) details, it's push notification token and a unique deviceClaim.<a href="#section-3-1.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-1.2">The owner device generates a new symmetric encryption key (Secret) and encrypts the data of KeyCreationRequest. Then generates an attestation data, that follows a WebAuthn API <span>[<a href="#WebAuthn-2" class="cite xref">WebAuthn-2</a>]</span>, specific to Apple - AAA, which covers the encrypted content. Owner device makes a call to Relay server (Intermediary) - createMailbox, passing over the encrypted content, device attestation, mailbox configuration (mailbox time-to-live, access rights - Read/Write/Delete), preview (display information) details, its push notification token and a unique deviceClaim.<a href="#section-3-1.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.3">Relay server verifies device attestation using WebAuthn verification rules specific to AAA, including verifying device PKI certificate in attestation blob. Relay server creates a mailbox, using mailboxConfiguration received in the request and stores encrypted content in it.<a href="#section-3-1.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-1.3">Relay server verifies device attestation using WebAuthn verification rules specific to attestation data used, including verifying device PKI certificate in attestation blob. Relay server creates a mailbox, using mailboxConfiguration received in the request and stores encrypted content in it.<a href="#section-3-1.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.4">The mailbox has a time-to-live, time, when it is to expire and be deleted by the Relay server. This time is limited by the value that can be considered both sufficient to complete the transfer and secure to against brute force attacks on the encrypted content the content - e.g. 48 hours.<a href="#section-3-1.4" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-1.4">The mailbox has a time-to-live which defines when it is to expire and be deleted by the Relay server. This time is limited by the value that can be considered both sufficient to complete the transfer and secure to against brute force attacks on the encrypted content - e.g. 48 hours.<a href="#section-3-1.4" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.5">Relay server generates a unique mailboxIdentifier value, that is hard to predict - e.g. using GUID - and builds a full URL (shareURL) referencing the mailbox - e.g. "www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002", which it returns to the Owner device.<a href="#section-3-1.5" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-1.5">Relay server generates a unique mailboxIdentifier value, that is hard to predict - e.g. using UUID - and builds a full URL (shareURL) referencing the mailbox - e.g. "https://www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002", which it returns to the Owner device.<a href="#section-3-1.5" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-1.6">Owner device locally stores the shareURL and the Secret and sends the shareURL with optional vertical in URL parameter and mandatory secret in Fragment part (e.g. "www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002?v=c#hXlr6aRC7KgJpOLTNZaLsw==") to the Friend's device (Receiver) over SMS.<a href="#section-3-1.6" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-1.6">Owner device locally stores the shareURL and the Secret and sends the shareURL with optional vertical in URL parameter and mandatory secret in Fragment part (e.g. "https://www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002?v=c#hXlr6aRC7KgJpOLTNZaLsw==") to the Friend's device (Receiver) over SMS.<a href="#section-3-1.6" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-3-1.7">Friend device receives the shareURL in SMS, messaging application makes an automatic GET call to shareURL (excluding Fragment part - Secret) - and fetches a preview (Display Information) html page with OpenGraph tags in the head:<a href="#section-3-1.7" class="pilcrow">¶</a>
 </li>
@@ -1257,25 +1271,25 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         </figcaption></figure>
 </div>
 <ul class="normal">
-<li class="normal" id="section-3-3.1">Messaging application shows the user a preview of the carKey that Owner wants to share with them. User accepts the shareURL by clicking on the preview in the messaging application. Messaging application redirects the user to wallet (credential manager application) using a deep link mechanism embedded into the OS.<a href="#section-3-3.1" class="pilcrow">¶</a>
+<li class="normal" id="section-3-3.1">Messaging application shows the a preview of the DCK on the Friend's device that Owner wants to share with them. User accepts the shareURL by clicking on the preview in the messaging application. Messaging application redirects the user to wallet (credential manager application) using a deep link mechanism embedded into the OS.<a href="#section-3-3.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-3-3.2">Wallet receives the shareURL with the Secret in the Fragment. Friend device checks if the Relay server is in allow-list of accepted Relay servers.<a href="#section-3-3.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-3.3">Wallet reads secure content from the mailbox using shareURL (without the Fragment part) with HTTP POST method, passing a unique deviceClaim with the request. Relay server binds the mailbox (identified by mailboxIdentifier) with the Owner device (with Owner device deviceClaim) and the Friend device (with Friend device deviceClaim). Now only these 2 devices are allowed to read and write secure content to this particular mailbox. This secures the message exchange and prevents other devices from altering the exchange between Owner and Friend.<a href="#section-3-3.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-3.3">Wallet reads secure content from the mailbox using shareURL (without the Fragment part) with ReadSecureContentFromMailbox method, passing a unique deviceClaim with the request. Thus, relay server binds the mailbox (identified by mailboxIdentifier) with the Owner device (with Owner device deviceClaim at the mailbox creation time) and the Friend device (with Friend device deviceClaim at the first time Friend device calls ReadSecureContentFromMailbox for the mailbiox). Now only these 2 devices are allowed to read and write secure content to this particular mailbox. This secures the message exchange and prevents other devices from altering the exchange between Owner and Friend.<a href="#section-3-3.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-3.4">Friend's device decrypts secure content using Secret and extracts KeyCreationRequest (ref to CCC specification).<a href="#section-3-3.4" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-3.4">Friend's device decrypts secure content using Secret and extracts KeyCreationRequest (ref to <span>[<a href="#CCC-Digital-Key-30" class="cite xref">CCC-Digital-Key-30</a>]</span> specification).<a href="#section-3-3.4" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-3.5">Friend device generates a KeySigningRequest (ref to CCC specification), encrypts it with Secret and uploads to the mailbox with UpdateMailbox call to Relay server, providing its unique deviceClaim and push notification token.<a href="#section-3-3.5" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-3.5">Friend device generates a KeySigningRequest (ref to <span>[<a href="#CCC-Digital-Key-30" class="cite xref">CCC-Digital-Key-30</a>]</span> specification), encrypts it with Secret and uploads to the mailbox with UpdateMailbox call to Relay server, providing its unique deviceClaim and push notification token.<a href="#section-3-3.5" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-3-3.6">Relay server sends a push notification to Owner's device via Push Notification Server.<a href="#section-3-3.6" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-3.7">Owner device, having received a push notification message,  reads secure content from the mailbox using shareURL with HTTP POST method, passing its unique deviceClaim with the request. Owner device decrypts secure content using Secret and extracts KeySigningRequest (ref to CCC specification).<a href="#section-3-3.7" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-3.7">Owner device, having received a push notification message,  reads secure content from the mailbox using shareURL with ReadSecureContentFromMailbox method, passing its unique deviceClaim with the request. Owner device decrypts secure content using Secret and extracts KeySigningRequest (ref to <span>[<a href="#CCC-Digital-Key-30" class="cite xref">CCC-Digital-Key-30</a>]</span> specification).<a href="#section-3-3.7" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-3.8">Owner device signs the Friend's device public key with Owner's private key and creates a KeyImportRequest (ref to CCC specification). Owner device encrypts it with the Secret and uploads to the mailbox with with UpdateMailbox call to Relay server, providing its unique deviceClaim.<a href="#section-3-3.8" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-3.8">Owner device signs the Friend's device public key with Owner's private key and creates a KeyImportRequest (ref to <span>[<a href="#CCC-Digital-Key-30" class="cite xref">CCC-Digital-Key-30</a>]</span> specification). Owner device encrypts it with the Secret and uploads to the mailbox with UpdateMailbox call to Relay server, providing its unique deviceClaim.<a href="#section-3-3.8" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-3-3.9">Relay server sends a push notification to Friend device via Push Notification Server.<a href="#section-3-3.9" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-3.10">Friend device, having received a push notification message,  reads secure content from the mailbox using shareURL with HTTP POST method, passing its unique deviceClaim with the request. Friend device decrypts secure content using Secret and extracts KeyImportRequest (ref to CCC specification). Friend device provisions the new credential to the wallet and deletes the mailbox with DeleteMailbox call to the Relay server. As an additional security measure, Friend device asks for a verification code (PIN code) generated by Owner device and communicated to Friend out-of-band.<a href="#section-3-3.10" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-3.10">Friend device, having received a push notification message,  reads secure content from the mailbox using shareURL with ReadSecureContentFromMailbox method, passing its unique deviceClaim with the request. Friend device decrypts secure content using Secret and extracts KeyImportRequest (ref to <span>[<a href="#CCC-Digital-Key-30" class="cite xref">CCC-Digital-Key-30</a>]</span> specification). Friend device provisions the new credential to the wallet and deletes the mailbox with DeleteMailbox call to the Relay server. As an additional security measure, Friend device asks for a verification code (PIN code) generated by Owner device and communicated to Friend out-of-band.<a href="#section-3-3.10" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
@@ -1304,7 +1318,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">1</td>
             <td class="text-left" rowspan="1" colspan="1">Owner's DCK</td>
             <td class="text-left" rowspan="1" colspan="1">Kicking-off arbitrary key sharing by spoofing user identity</td>
-            <td class="text-left" rowspan="1" colspan="1">DCK become shared with arbitrary user/adversary allowing them access to the Owner's car</td>
+            <td class="text-left" rowspan="1" colspan="1">DCK becomes shared with arbitrary user/adversary allowing them access to the Owner's car</td>
             <td class="text-left" rowspan="1" colspan="1">1) User auth (face/touch ID), 2) Secure Intent</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
@@ -1313,7 +1327,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">Content on Intermediary server</td>
             <td class="text-left" rowspan="1" colspan="1">Content recovery by brute forcing secret</td>
             <td class="text-left" rowspan="1" colspan="1">Exposure of encrypted content and key redemption</td>
-            <td class="text-left" rowspan="1" colspan="1">1) Strong source of randomness for salt, 2) At least 128 bit key lenght, 3) Limitted TTL of the mailbox</td>
+            <td class="text-left" rowspan="1" colspan="1">1) Strong source of randomness for salt, 2) At least 128 bit key length, 3) Limitted TTL of the mailbox</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
@@ -1321,13 +1335,13 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">Content on Intermediary server</td>
             <td class="text-left" rowspan="1" colspan="1">Content recovery by intercepting secret</td>
             <td class="text-left" rowspan="1" colspan="1">Ability to decrypt content on Intermediary server</td>
-            <td class="text-left" rowspan="1" colspan="1">1) Physical separation between content and secret, e.g. secret sent as URI fragment to recipient, 2) Optional second factor(e.g. Device PIN, Activation Options - please refer to CCC Technical Specification) can be propoused to the user via UI notification based on security options of selected primary sharing channel (used to share URL with secret)</td>
+            <td class="text-left" rowspan="1" colspan="1">1) Physical separation between content and secret, e.g. secret sent as URI fragment to recipient, 2) Optional second factor(e.g. Device PIN, Activation Options - please refer to CCC Technical Specification) can be proposed to the user via user notification based on security options of selected primary sharing channel (used to share URL with secret)</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">4</td>
             <td class="text-left" rowspan="1" colspan="1">Content on Intermediary server</td>
-            <td class="text-left" rowspan="1" colspan="1">Accees to content by multiple arbitrary  users/devices</td>
+            <td class="text-left" rowspan="1" colspan="1">Access to content by multiple arbitrary  users/devices</td>
             <td class="text-left" rowspan="1" colspan="1">1) Adversary can go to partner and redeem the shared key, 2) Adversary can send push notifications</td>
             <td class="text-left" rowspan="1" colspan="1">1) Mailboxes identified by version 4 UUID defined in <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span>(hard to guess/bruteforce), 2) Mailboxes 'tied' to sender and recipient (trust on first use via deviceClaim), 3) TTL limit for mailboxes, 4) Mailboxes deleted after pass redemption</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
@@ -1369,7 +1383,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">Device PIN</td>
             <td class="text-left" rowspan="1" colspan="1">Weak PIN can be easily guessed</td>
             <td class="text-left" rowspan="1" colspan="1">Anyone with share URL in their possession can guess the PIN and redeem the key</td>
-            <td class="text-left" rowspan="1" colspan="1">1) Use of strong RNG as a source to generate Device PIN, 2) Long enough PIN (e.g. 6 digits) as per <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span> reccomendations, 3) Limit numer of retries (e.g. DEvice PIN retry counter + limit) as per <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span> reccomendations</td>
+            <td class="text-left" rowspan="1" colspan="1">1) Use of strong RNG as a source to generate Device PIN, 2) Long enough PIN (e.g. 6 digits) as per <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span> recommendations, 3) Limit the number of retries (e.g. Device PIN retry counter + limit) as per <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span> recommendations</td>
             <td class="text-left" rowspan="1" colspan="1">
               <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span>, section 5.1.1.1 Memorized Secret Authenticators</td>
           </tr>
@@ -1378,7 +1392,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">Device PIN</td>
             <td class="text-left" rowspan="1" colspan="1">Eavesdropping on weak msg channels/app</td>
             <td class="text-left" rowspan="1" colspan="1">PIN exposure would allow one with possession of share URL and Secret to redeem key</td>
-            <td class="text-left" rowspan="1" colspan="1">In person, out of band PIN trasfer, e.g. voice channel</td>
+            <td class="text-left" rowspan="1" colspan="1">In person, out of band PIN transfer, e.g. voice channel</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
           <tr>
@@ -1394,7 +1408,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">Device PIN retry counter/limit</td>
             <td class="text-left" rowspan="1" colspan="1">Device PIN brute force</td>
             <td class="text-left" rowspan="1" colspan="1">Device PIN successful guess</td>
-            <td class="text-left" rowspan="1" colspan="1">1) Use of strong RNG as a source to generate Device PIN, 2) Long enough PIN (e.g. 6 digits) as per  <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span> reccomendations, 3) Limit numer of retries (e.g. DEvice PIN retry counter + limit) as per <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span> reccomendations</td>
+            <td class="text-left" rowspan="1" colspan="1">1) Use of strong RNG as a source to generate Device PIN, 2) Long enough PIN (e.g. 6 digits) as per  <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span> recommendations, 3) Limit the number of retries (e.g. DEvice PIN retry counter + limit) as per <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span> recommendations</td>
             <td class="text-left" rowspan="1" colspan="1">
               <span>[<a href="#NIST-800-63B" class="cite xref">NIST-800-63B</a>]</span>, section 5.1.1.1 Memorized Secret Authenticators</td>
           </tr>
@@ -1418,7 +1432,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">15</td>
             <td class="text-left" rowspan="1" colspan="1">Sharing Invitation</td>
             <td class="text-left" rowspan="1" colspan="1">Friend device compromise allow malware to forward invitation to an adversary</td>
-            <td class="text-left" rowspan="1" colspan="1">Share invitation forwarding and key redemtion by malicious party</td>
+            <td class="text-left" rowspan="1" colspan="1">Share invitation forwarding and key redemption by malicious party</td>
             <td class="text-left" rowspan="1" colspan="1">Activation Options as defined in <span>[<a href="#CCC-Digital-Key-30" class="cite xref">CCC-Digital-Key-30</a>]</span>, Section 11.2 Sharing Principles, subsection 11.2.1.3. Activation Options</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
@@ -1451,7 +1465,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <td class="text-left" rowspan="1" colspan="1">User's credentials, payment card details, etc</td>
             <td class="text-left" rowspan="1" colspan="1">Phishing attacks leveraging malicious JS on landing page</td>
             <td class="text-left" rowspan="1" colspan="1">1) Landing page URL fragement contains encryption key - meaning malicious JS could use key to decrypt contents, 2) Malicious JS can phish for user credentials, payment card information, or other sensitive data</td>
-            <td class="text-left" rowspan="1" colspan="1">1) Properly vet JS that is embeded on landing page, 2) Define strong content security policy</td>
+            <td class="text-left" rowspan="1" colspan="1">1) Properly vet Java Script that is embedded on landing page, 2) Define strong content security policy</td>
             <td class="text-left" rowspan="1" colspan="1"> </td>
           </tr>
         </tbody>
@@ -1481,7 +1495,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <dl class="references">
 <dt id="CCC-Digital-Key-30">[CCC-Digital-Key-30]</dt>
       <dd>
-<span class="refAuthor">Car Connectivity Consortium</span>, <span class="refTitle">"Digital Key – The Future of Vehicle Access"</span>, <time datetime="2021-11" class="refDate">November 2021</time>, <span>&lt;<a href="https://global-carconnectivity.org/wp-content/uploads/2021/11/CCC_Digital_Key_Whitepaper_Approved.pdf">https://global-carconnectivity.org/wp-content/uploads/2021/11/CCC_Digital_Key_Whitepaper_Approved.pdf</a>&gt;</span>. </dd>
+<span class="refAuthor">Car Connectivity Consortium</span>, <span class="refTitle">"Digital Key Release 3"</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://carconnectivity.org/download-digital-key-3-specification/">https://carconnectivity.org/download-digital-key-3-specification/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="NIST-800-63B">[NIST-800-63B]</dt>
       <dd>
@@ -1500,8 +1514,12 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="Tigress-00">[Tigress-00]</dt>
-    <dd>
+      <dd>
 <span class="refAuthor">Vinokurov, D.</span>, <span class="refAuthor">Byington, M.</span>, <span class="refAuthor">Lerch, M.</span>, <span class="refAuthor">Pelletier, A.</span>, and <span class="refAuthor">N. Sha</span>, <span class="refTitle">"Transfer Digital Credentials Securely"</span>, <time datetime="2022-09" class="refDate">September 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/draft-art-tigress/">https://datatracker.ietf.org/doc/draft-art-tigress/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="WebAuthn-2">[WebAuthn-2]</dt>
+    <dd>
+<span class="refAuthor">W3</span>, <span class="refTitle">"Web Authentication - An API for accessing Public Key Credentials - Level 2"</span>, <time datetime="2021-04" class="refDate">April 2021</time>, <span>&lt;<a href="https://www.w3.org/TR/webauthn-2/">https://www.w3.org/TR/webauthn-2/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>

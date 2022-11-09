@@ -5,11 +5,11 @@
 Tigress                                                     D. Vinokurov
 Internet-Draft                                               A. Bulgakov
 Intended status: Informational                              J. L. Giraud
-Expires: 12 May 2023                                            C. Astiz
+Expires: 13 May 2023                                            C. Astiz
                                                             A. Pelletier
                                                                J. Hansen
                                                                Apple Inc
-                                                         8 November 2022
+                                                         9 November 2022
 
 
 Transfer Digital Credentials Securely: sample implementation and threat
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 May 2023.
+   This Internet-Draft will expire on 13 May 2023.
 
 Copyright Notice
 
@@ -69,7 +69,7 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Sample Implementation - Digital CarKey sharing example.
+   3.  Sample Implementation - Digital Car Key sharing example.
    4.  Threat Model
    5.  Security Considerations
    6.  IANA Considerations
@@ -96,47 +96,64 @@ Table of Contents
 
    *  TTL - Time To Live
 
-3.  Sample Implementation - Digital CarKey sharing example.
+   *  AAA - Apple Anonymous Attestation - a subtype of WebAuthn
+      [WebAuthn-2]
+
+   *  PKI - public Key Infrastructure
+
+   *  UUID - a unique identifier defined in [RFC4122]
+
+   *  SMS - Short Message Service
+
+   *  OS - Operating System
+
+   *  URI - Uniform Resource Identifier
+
+   *  RNG - Random Number Generator
+
+3.  Sample Implementation - Digital Car Key sharing example.
 
    *  An owner device (Sender) starts sharing flow with selection of
       credential entitlements for the key shared - e.g. access
       entitlements (allow open the car, allow start the engine, allow to
       drive the car), time of sharing - e.g. from 09/01/2022 to
-      09/03/2022, then generates a KeyCreationRequest (per CCC spec).
+      09/03/2022, then generates a KeyCreationRequest (per
+      [CCC-Digital-Key-30] ).
 
    *  The owner device generates a new symmetric encryption key (Secret)
-      and encrypts the data.  Then generates an attestation blob, that
-      follows a WebAuthn API, specific to Apple - AAA (Apple Anonymous
-      Attestation), which covers the encrypted content.  Owner device
-      makes a call to Relay server (Intermediary) - createMailbox,
-      passing over the encrypted content, device attestation, mailbox
-      configuration (mailbox time-to-live, access rights - RWD), preview
-      (display information) details, it's push notification token and a
-      unique deviceClaim.
+      and encrypts the data of KeyCreationRequest.  Then generates an
+      attestation data, that follows a WebAuthn API [WebAuthn-2],
+      specific to Apple - AAA, which covers the encrypted content.
+      Owner device makes a call to Relay server (Intermediary) -
+      createMailbox, passing over the encrypted content, device
+      attestation, mailbox configuration (mailbox time-to-live, access
+      rights - Read/Write/Delete), preview (display information)
+      details, its push notification token and a unique deviceClaim.
 
    *  Relay server verifies device attestation using WebAuthn
-      verification rules specific to AAA, including verifying device PKI
-      certificate in attestation blob.  Relay server creates a mailbox,
-      using mailboxConfiguration received in the request and stores
-      encrypted content in it.
+      verification rules specific to attestation data used, including
+      verifying device PKI certificate in attestation blob.  Relay
+      server creates a mailbox, using mailboxConfiguration received in
+      the request and stores encrypted content in it.
 
-   *  The mailbox has a time-to-live, time, when it is to expire and be
-      deleted by the Relay server.  This time is limited by the value
-      that can be considered both sufficient to complete the transfer
-      and secure to against brute force attacks on the encrypted content
-      the content - e.g. 48 hours.
+   *  The mailbox has a time-to-live which defines when it is to expire
+      and be deleted by the Relay server.  This time is limited by the
+      value that can be considered both sufficient to complete the
+      transfer and secure to against brute force attacks on the
+      encrypted content - e.g. 48 hours.
 
    *  Relay server generates a unique mailboxIdentifier value, that is
-      hard to predict - e.g. using GUID - and builds a full URL
-      (shareURL) referencing the mailbox - e.g. "www.example.com/v1/
-      m/2bba630e-519b-11ec-bf63-0242ac130002", which it returns to the
-      Owner device.
+      hard to predict - e.g. using UUID - and builds a full URL
+      (shareURL) referencing the mailbox - e.g.
+      "https://www.example.com/v1/m/2bba630e-519b-11ec-
+      bf63-0242ac130002", which it returns to the Owner device.
 
    *  Owner device locally stores the shareURL and the Secret and sends
       the shareURL with optional vertical in URL parameter and mandatory
-      secret in Fragment part (e.g. "www.example.com/v1/m/2bba630e-519b-
-      11ec-bf63-0242ac130002?v=c#hXlr6aRC7KgJpOLTNZaLsw==") to the
-      Friend's device (Receiver) over SMS.
+      secret in Fragment part (e.g. "https://www.example.com/v1/
+      m/2bba630e-519b-11ec-
+      bf63-0242ac130002?v=c#hXlr6aRC7KgJpOLTNZaLsw==") to the Friend's
+      device (Receiver) over SMS.
 
    *  Friend device receives the shareURL in SMS, messaging application
       makes an automatic GET call to shareURL (excluding Fragment part -
@@ -157,62 +174,67 @@ Table of Contents
 
              Figure 1: OpenGraph preview of a credential
 
-   *  Messaging application shows the user a preview of the carKey that
-      Owner wants to share with them.  User accepts the shareURL by
-      clicking on the preview in the messaging application.  Messaging
-      application redirects the user to wallet (credential manager
-      application) using a deep link mechanism embedded into the OS.
+   *  Messaging application shows the a preview of the DCK on the
+      Friend's device that Owner wants to share with them.  User accepts
+      the shareURL by clicking on the preview in the messaging
+      application.  Messaging application redirects the user to wallet
+      (credential manager application) using a deep link mechanism
+      embedded into the OS.
 
    *  Wallet receives the shareURL with the Secret in the Fragment.
       Friend device checks if the Relay server is in allow-list of
       accepted Relay servers.
 
    *  Wallet reads secure content from the mailbox using shareURL
-      (without the Fragment part) with HTTP POST method, passing a
-      unique deviceClaim with the request.  Relay server binds the
-      mailbox (identified by mailboxIdentifier) with the Owner device
-      (with Owner device deviceClaim) and the Friend device (with Friend
-      device deviceClaim).  Now only these 2 devices are allowed to read
-      and write secure content to this particular mailbox.  This secures
-      the message exchange and prevents other devices from altering the
-      exchange between Owner and Friend.
+      (without the Fragment part) with ReadSecureContentFromMailbox
+      method, passing a unique deviceClaim with the request.  Thus,
+      relay server binds the mailbox (identified by mailboxIdentifier)
+      with the Owner device (with Owner device deviceClaim at the
+      mailbox creation time) and the Friend device (with Friend device
+      deviceClaim at the first time Friend device calls
+      ReadSecureContentFromMailbox for the mailbiox).  Now only these 2
+      devices are allowed to read and write secure content to this
+      particular mailbox.  This secures the message exchange and
+      prevents other devices from altering the exchange between Owner
+      and Friend.
 
    *  Friend's device decrypts secure content using Secret and extracts
-      KeyCreationRequest (ref to CCC specification).
+      KeyCreationRequest (ref to [CCC-Digital-Key-30] specification).
 
-   *  Friend device generates a KeySigningRequest (ref to CCC
-      specification), encrypts it with Secret and uploads to the mailbox
-      with UpdateMailbox call to Relay server, providing its unique
-      deviceClaim and push notification token.
+   *  Friend device generates a KeySigningRequest (ref to
+      [CCC-Digital-Key-30] specification), encrypts it with Secret and
+      uploads to the mailbox with UpdateMailbox call to Relay server,
+      providing its unique deviceClaim and push notification token.
 
    *  Relay server sends a push notification to Owner's device via Push
       Notification Server.
 
    *  Owner device, having received a push notification message, reads
-      secure content from the mailbox using shareURL with HTTP POST
-      method, passing its unique deviceClaim with the request.  Owner
-      device decrypts secure content using Secret and extracts
-      KeySigningRequest (ref to CCC specification).
+      secure content from the mailbox using shareURL with
+      ReadSecureContentFromMailbox method, passing its unique
+      deviceClaim with the request.  Owner device decrypts secure
+      content using Secret and extracts KeySigningRequest (ref to
+      [CCC-Digital-Key-30] specification).
 
    *  Owner device signs the Friend's device public key with Owner's
-      private key and creates a KeyImportRequest (ref to CCC
-      specification).  Owner device encrypts it with the Secret and
-      uploads to the mailbox with with UpdateMailbox call to Relay
-      server, providing its unique deviceClaim.
+      private key and creates a KeyImportRequest (ref to
+      [CCC-Digital-Key-30] specification).  Owner device encrypts it
+      with the Secret and uploads to the mailbox with UpdateMailbox call
+      to Relay server, providing its unique deviceClaim.
 
    *  Relay server sends a push notification to Friend device via Push
       Notification Server.
 
    *  Friend device, having received a push notification message, reads
-      secure content from the mailbox using shareURL with HTTP POST
-      method, passing its unique deviceClaim with the request.  Friend
-      device decrypts secure content using Secret and extracts
-      KeyImportRequest (ref to CCC specification).  Friend device
-      provisions the new credential to the wallet and deletes the
-      mailbox with DeleteMailbox call to the Relay server.  As an
-      additional security measure, Friend device asks for a verification
-      code (PIN code) generated by Owner device and communicated to
-      Friend out-of-band.
+      secure content from the mailbox using shareURL with
+      ReadSecureContentFromMailbox method, passing its unique
+      deviceClaim with the request.  Friend device decrypts secure
+      content using Secret and extracts KeyImportRequest (ref to
+      [CCC-Digital-Key-30] specification).  Friend device provisions the
+      new credential to the wallet and deletes the mailbox with
+      DeleteMailbox call to the Relay server.  As an additional security
+      measure, Friend device asks for a verification code (PIN code)
+      generated by Owner device and communicated to Friend out-of-band.
 
 4.  Threat Model
 
@@ -224,7 +246,7 @@ Table of Contents
    +====+============+===============+=============+=====================+===============+
    |Item|Asset       |Threat         |Impact       |Mitigation           |Comment        |
    +====+============+===============+=============+=====================+===============+
-   |1   |Owner's DCK |Kicking-off    |DCK become   |1) User auth (face/  |               |
+   |1   |Owner's DCK |Kicking-off    |DCK becomes  |1) User auth (face/  |               |
    |    |            |arbitrary key  |shared with  |touch ID), 2) Secure |               |
    |    |            |sharing by     |arbitrary    |Intent               |               |
    |    |            |spoofing user  |user/        |                     |               |
@@ -236,7 +258,7 @@ Table of Contents
    |2   |Content on  |Content        |Exposure of  |1) Strong source of  |               |
    |    |Intermediary|recovery by    |encrypted    |randomness for salt, |               |
    |    |server      |brute forcing  |content and  |2) At least 128 bit  |               |
-   |    |            |secret         |key          |key lenght, 3)       |               |
+   |    |            |secret         |key          |key length, 3)       |               |
    |    |            |               |redemption   |Limitted TTL of the  |               |
    |    |            |               |             |mailbox              |               |
    +----+------------+---------------+-------------+---------------------+---------------+
@@ -253,8 +275,8 @@ Table of Contents
    |    |            |               |             |refer to CCC         |               |
    |    |            |               |             |Technical            |               |
    |    |            |               |             |Specification) can be|               |
-   |    |            |               |             |propoused to the user|               |
-   |    |            |               |             |via UI notification  |               |
+   |    |            |               |             |proposed to the user |               |
+   |    |            |               |             |via user notification|               |
    |    |            |               |             |based on security    |               |
    |    |            |               |             |options of selected  |               |
    |    |            |               |             |primary sharing      |               |
@@ -262,7 +284,7 @@ Table of Contents
    |    |            |               |             |share URL with       |               |
    |    |            |               |             |secret)              |               |
    +----+------------+---------------+-------------+---------------------+---------------+
-   |4   |Content on  |Accees to      |1) Adversary |1) Mailboxes         |               |
+   |4   |Content on  |Access to      |1) Adversary |1) Mailboxes         |               |
    |    |Intermediary|content by     |can go to    |identified by version|               |
    |    |server      |multiple       |partner and  |4 UUID defined in    |               |
    |    |            |arbitrary      |redeem the   |[RFC4122](hard to    |               |
@@ -320,16 +342,16 @@ Table of Contents
    |    |            |               |possession   |2) Long enough PIN   |Secret         |
    |    |            |               |can guess the|(e.g. 6 digits) as   |Authenticators |
    |    |            |               |PIN and      |per [NIST-800-63B]   |               |
-   |    |            |               |redeem the   |reccomendations, 3)  |               |
-   |    |            |               |key          |Limit numer of       |               |
-   |    |            |               |             |retries (e.g.  DEvice|               |
+   |    |            |               |redeem the   |recommendations, 3)  |               |
+   |    |            |               |key          |Limit the number of  |               |
+   |    |            |               |             |retries (e.g.  Device|               |
    |    |            |               |             |PIN retry counter +  |               |
    |    |            |               |             |limit) as per        |               |
    |    |            |               |             |[NIST-800-63B]       |               |
-   |    |            |               |             |reccomendations      |               |
+   |    |            |               |             |recommendations      |               |
    +----+------------+---------------+-------------+---------------------+---------------+
    |10  |Device PIN  |Eavesdropping  |PIN exposure |In person, out of    |               |
-   |    |            |on weak msg    |would allow  |band PIN trasfer,    |               |
+   |    |            |on weak msg    |would allow  |band PIN transfer,   |               |
    |    |            |channels/app   |one with     |e.g. voice channel   |               |
    |    |            |               |possession of|                     |               |
    |    |            |               |share URL and|                     |               |
@@ -356,13 +378,13 @@ Table of Contents
    |    |limit       |               |             |2) Long enough PIN   |Secret         |
    |    |            |               |             |(e.g. 6 digits) as   |Authenticators |
    |    |            |               |             |per [NIST-800-63B]   |               |
-   |    |            |               |             |reccomendations, 3)  |               |
-   |    |            |               |             |Limit numer of       |               |
+   |    |            |               |             |recommendations, 3)  |               |
+   |    |            |               |             |Limit the number of  |               |
    |    |            |               |             |retries (e.g.  DEvice|               |
    |    |            |               |             |PIN retry counter +  |               |
    |    |            |               |             |limit) as per        |               |
    |    |            |               |             |[NIST-800-63B]       |               |
-   |    |            |               |             |reccomendations      |               |
+   |    |            |               |             |recommendations      |               |
    +----+------------+---------------+-------------+---------------------+---------------+
    |13  |Sharing     |Messaging      |Share        |1) Send invitation   |               |
    |    |Invitation  |channel        |invitation   |and Device PIN via   |               |
@@ -383,7 +405,7 @@ Table of Contents
    |    |Invitation  |compromise     |invitation   |defined in           |               |
    |    |            |allow malware  |forwarding   |[CCC-Digital-Key-30],|               |
    |    |            |to forward     |and key      |Section 11.2 Sharing |               |
-   |    |            |invitation to  |redemtion by |Principles,          |               |
+   |    |            |invitation to  |redemption by|Principles,          |               |
    |    |            |an adversary   |malicious    |subsection 11.2.1.3. |               |
    |    |            |               |party        |Activation Options   |               |
    +----+------------+---------------+-------------+---------------------+---------------+
@@ -415,12 +437,12 @@ Table of Contents
    |    |            |               |             |subsection 11.2.1.3. |               |
    |    |            |               |             |Activation Options   |               |
    +----+------------+---------------+-------------+---------------------+---------------+
-   |19  |User's      |Phishing       |1) Landing   |1) Properly vet JS   |               |
-   |    |credentials,|attacks        |page URL     |that is embeded on   |               |
-   |    |payment card|leveraging     |fragement    |landing page, 2)     |               |
-   |    |details, etc|malicious JS on|contains     |Define strong content|               |
-   |    |            |landing page   |encryption   |security policy      |               |
-   |    |            |               |key - meaning|                     |               |
+   |19  |User's      |Phishing       |1) Landing   |1) Properly vet Java |               |
+   |    |credentials,|attacks        |page URL     |Script that is       |               |
+   |    |payment card|leveraging     |fragement    |embedded on landing  |               |
+   |    |details, etc|malicious JS on|contains     |page, 2) Define      |               |
+   |    |            |landing page   |encryption   |strong content       |               |
+   |    |            |               |key - meaning|security policy      |               |
    |    |            |               |malicious JS |                     |               |
    |    |            |               |could use key|                     |               |
    |    |            |               |to decrypt   |                     |               |
@@ -449,10 +471,9 @@ Table of Contents
 7.  Normative References
 
    [CCC-Digital-Key-30]
-              Car Connectivity Consortium, "Digital Key – The Future of
-              Vehicle Access", November 2021, <https://global-
-              carconnectivity.org/wp-content/uploads/2021/11/
-              CCC_Digital_Key_Whitepaper_Approved.pdf>.
+              Car Connectivity Consortium, "Digital Key Release 3", July
+              2022, <https://carconnectivity.org/download-digital-key-
+              3-specification/>.
 
    [NIST-800-63B]
               NIST, "NIST Special Publication 800-63B, Digital Identity
@@ -478,6 +499,11 @@ Table of Contents
               N. Sha, "Transfer Digital Credentials Securely", September
               2022,
               <https://datatracker.ietf.org/doc/draft-art-tigress/>.
+
+   [WebAuthn-2]
+              W3, "Web Authentication - An API for accessing Public Key
+              Credentials - Level 2", April 2021,
+              <https://www.w3.org/TR/webauthn-2/>.
 
 Acknowledgments
 
