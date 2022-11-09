@@ -125,7 +125,7 @@ This document provides a sample implementation and threat model for Tigress draf
 - SMS - Short Message Service
 - OS - Operating System
 - URI - Uniform Resource Identifier
-- URL - Universal Resource Locator 
+- URL - Universal Resource Locator
 - RNG - Random Number Generator
 
 # Sample Implementation - Digital Car Key sharing example.
