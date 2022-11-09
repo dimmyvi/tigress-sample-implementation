@@ -89,7 +89,7 @@ normative:
     date: 2022-11
     target: https://pages.nist.gov/800-63-3/sp800-63b.html
 
-  WebAuthn-2: 
+  WebAuthn-2:
     author:
       org: W3
     title: "Web Authentication - An API for accessing Public Key Credentials - Level 2"
@@ -121,7 +121,7 @@ This document provides a sample implementation and threat model for Tigress draf
 - TTL - Time To Live
 - AAA - Apple Anonymous Attestation - a subtype of WebAuthn {{WebAuthn-2}}
 - PKI - public Key Infrastructure
-- UUID - a unique identifier defined in {{!RFC4122}} 
+- UUID - a unique identifier defined in {{!RFC4122}}
 - SMS - Short Message Service
 - OS - Operating System
 - URI - Uniform Resource Identifier
