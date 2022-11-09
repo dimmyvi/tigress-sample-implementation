@@ -500,7 +500,7 @@ Table of Contents
 
    [Tigress-00]
               Vinokurov, D., Byington, M., Lerch, M., Pelletier, A., and
-              N. Sha, "Transfer Digital Credentials Securely", September
+              N. Sha, "Transfer Digital Credentials Securely", November
               2022,
               <https://datatracker.ietf.org/doc/draft-art-tigress/>.
 
