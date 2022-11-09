@@ -109,23 +109,25 @@ Table of Contents
 
    *  URI - Uniform Resource Identifier
 
+   *  URL - Universal Resource Locator
+
    *  RNG - Random Number Generator
 
 3.  Sample Implementation - Digital Car Key sharing example.
 
-   *  An owner device (Sender) starts sharing flow with selection of
+   *  An Owner's device (Sender) starts sharing flow with selection of
       credential entitlements for the key shared - e.g. access
       entitlements (allow open the car, allow start the engine, allow to
       drive the car), time of sharing - e.g. from 09/01/2022 to
       09/03/2022, then generates a KeyCreationRequest (per
       [CCC-Digital-Key-30] ).
 
-   *  The owner device generates a new symmetric encryption key (Secret)
-      and encrypts the data of KeyCreationRequest.  Then generates an
-      attestation data, that follows a WebAuthn API [WebAuthn-2],
-      specific to Apple - AAA, which covers the encrypted content.
-      Owner device makes a call to Relay server (Intermediary) -
-      createMailbox, passing over the encrypted content, device
+   *  The Owner's device generates a new symmetric encryption key
+      (Secret) and builds an encrypted KeyCreationRequest.  Then it
+      generates an attestation data, that follows a WebAuthn API
+      [WebAuthn-2], specific to Apple - AAA, which covers the encrypted
+      content.  Owner device makes a call to Relay server (Intermediary)
+      - createMailbox, passing over the encrypted content, device
       attestation, mailbox configuration (mailbox time-to-live, access
       rights - Read/Write/Delete), preview (display information)
       details, its push notification token and a unique deviceClaim.
@@ -139,26 +141,26 @@ Table of Contents
    *  The mailbox has a time-to-live which defines when it is to expire
       and be deleted by the Relay server.  This time is limited by the
       value that can be considered both sufficient to complete the
-      transfer and secure to against brute force attacks on the
-      encrypted content - e.g. 48 hours.
+      transfer and secure against brute force attacks on the encrypted
+      content - e.g. 48 hours.
 
    *  Relay server generates a unique mailboxIdentifier value, that is
-      hard to predict - e.g. using UUID - and builds a full URL
+      hard to predict - i.e. using UUID - and builds a full URL
       (shareURL) referencing the mailbox - e.g.
       "https://www.example.com/v1/m/2bba630e-519b-11ec-
       bf63-0242ac130002", which it returns to the Owner device.
 
-   *  Owner device locally stores the shareURL and the Secret and sends
-      the shareURL with optional vertical in URL parameter and mandatory
-      secret in Fragment part (e.g. "https://www.example.com/v1/
-      m/2bba630e-519b-11ec-
+   *  Owner's device locally stores the shareURL and the Secret and
+      sends the shareURL with optional vertical in URL parameter and
+      mandatory secret in Fragment part (e.g.
+      "https://www.example.com/v1/m/2bba630e-519b-11ec-
       bf63-0242ac130002?v=c#hXlr6aRC7KgJpOLTNZaLsw==") to the Friend's
       device (Receiver) over SMS.
 
-   *  Friend device receives the shareURL in SMS, messaging application
-      makes an automatic GET call to shareURL (excluding Fragment part -
-      Secret) - and fetches a preview (Display Information) html page
-      with OpenGraph tags in the head:
+   *  Friend's device receives the shareURL in SMS, messaging
+      application makes an automatic GET call to shareURL (excluding
+      Fragment part - Secret) - and fetches a preview (Display
+      Information) html page with OpenGraph tags in the head:
 
 <html prefix="og: https://ogp.me/ns#">
 <head>
@@ -174,25 +176,25 @@ Table of Contents
 
              Figure 1: OpenGraph preview of a credential
 
-   *  Messaging application shows the a preview of the DCK on the
-      Friend's device that Owner wants to share with them.  User accepts
-      the shareURL by clicking on the preview in the messaging
-      application.  Messaging application redirects the user to wallet
-      (credential manager application) using a deep link mechanism
-      embedded into the OS.
+   *  Messaging application shows a preview of the DCK on the Friend's
+      device that Owner wants to share with them.  User accepts the
+      shareURL by clicking on the preview in the messaging application.
+      Messaging application redirects the user to wallet (credential
+      manager application) using a deep link mechanism embedded into the
+      OS.
 
    *  Wallet receives the shareURL with the Secret in the Fragment.
-      Friend device checks if the Relay server is in allow-list of
+      Friend's device checks if the Relay server is in allow-list of
       accepted Relay servers.
 
    *  Wallet reads secure content from the mailbox using shareURL
       (without the Fragment part) with ReadSecureContentFromMailbox
       method, passing a unique deviceClaim with the request.  Thus,
       relay server binds the mailbox (identified by mailboxIdentifier)
-      with the Owner device (with Owner device deviceClaim at the
-      mailbox creation time) and the Friend device (with Friend device
-      deviceClaim at the first time Friend device calls
-      ReadSecureContentFromMailbox for the mailbiox).  Now only these 2
+      with the Owner's device (with Owner's device deviceClaim at the
+      mailbox creation time) and the Friend's device (with Friend's
+      device deviceClaim at the first time Friend's device calls
+      ReadSecureContentFromMailbox for the mailbox).  Now only these 2
       devices are allowed to read and write secure content to this
       particular mailbox.  This secures the message exchange and
       prevents other devices from altering the exchange between Owner
@@ -201,7 +203,7 @@ Table of Contents
    *  Friend's device decrypts secure content using Secret and extracts
       KeyCreationRequest (ref to [CCC-Digital-Key-30] specification).
 
-   *  Friend device generates a KeySigningRequest (ref to
+   *  Friend's device generates a KeySigningRequest (ref to
       [CCC-Digital-Key-30] specification), encrypts it with Secret and
       uploads to the mailbox with UpdateMailbox call to Relay server,
       providing its unique deviceClaim and push notification token.
@@ -212,29 +214,30 @@ Table of Contents
    *  Owner device, having received a push notification message, reads
       secure content from the mailbox using shareURL with
       ReadSecureContentFromMailbox method, passing its unique
-      deviceClaim with the request.  Owner device decrypts secure
+      deviceClaim with the request.  Owner's device decrypts secure
       content using Secret and extracts KeySigningRequest (ref to
       [CCC-Digital-Key-30] specification).
 
-   *  Owner device signs the Friend's device public key with Owner's
+   *  Owner's device signs the Friend's device public key with Owner's
       private key and creates a KeyImportRequest (ref to
-      [CCC-Digital-Key-30] specification).  Owner device encrypts it
+      [CCC-Digital-Key-30] specification).  Owner's device encrypts it
       with the Secret and uploads to the mailbox with UpdateMailbox call
       to Relay server, providing its unique deviceClaim.
 
-   *  Relay server sends a push notification to Friend device via Push
+   *  Relay server sends a push notification to Friend's device via Push
       Notification Server.
 
-   *  Friend device, having received a push notification message, reads
-      secure content from the mailbox using shareURL with
+   *  Friend's device, having received a push notification message,
+      reads secure content from the mailbox using shareURL with
       ReadSecureContentFromMailbox method, passing its unique
       deviceClaim with the request.  Friend device decrypts secure
       content using Secret and extracts KeyImportRequest (ref to
-      [CCC-Digital-Key-30] specification).  Friend device provisions the
-      new credential to the wallet and deletes the mailbox with
+      [CCC-Digital-Key-30] specification).  Friend's device provisions
+      the new credential to the wallet and deletes the mailbox with
       DeleteMailbox call to the Relay server.  As an additional security
       measure, Friend device asks for a verification code (PIN code)
-      generated by Owner device and communicated to Friend out-of-band.
+      generated by Owner's device and communicated to Friend out-of-
+      band.
 
 4.  Threat Model
 
@@ -380,7 +383,7 @@ Table of Contents
    |    |            |               |             |per [NIST-800-63B]   |               |
    |    |            |               |             |recommendations, 3)  |               |
    |    |            |               |             |Limit the number of  |               |
-   |    |            |               |             |retries (e.g.  DEvice|               |
+   |    |            |               |             |retries (e.g.  Device|               |
    |    |            |               |             |PIN retry counter +  |               |
    |    |            |               |             |limit) as per        |               |
    |    |            |               |             |[NIST-800-63B]       |               |
