@@ -437,17 +437,18 @@ Table of Contents
    |    |            |               |             |subsection 11.2.1.3. |               |
    |    |            |               |             |Activation Options   |               |
    +----+------------+---------------+-------------+---------------------+---------------+
-   |19  |User's      |Phishing       |1) Landing   |1) Properly vet Java |               |
+   |19  |User's      |Phishing       |1) Preview   |1) Properly vet Java |               |
    |    |credentials,|attacks        |page URL     |Script that is       |               |
-   |    |payment card|leveraging     |fragement    |embedded on landing  |               |
-   |    |details, etc|malicious JS on|contains     |page, 2) Define      |               |
-   |    |            |landing page   |encryption   |strong content       |               |
-   |    |            |               |key - meaning|security policy      |               |
+   |    |payment card|leveraging     |fragement    |embedded in the      |               |
+   |    |details, etc|malicious Java |contains     |preview page, 2)     |               |
+   |    |            |Script in      |encryption   |Define strong content|               |
+   |    |            |preview page   |key - meaning|security policy      |               |
    |    |            |               |malicious JS |                     |               |
    |    |            |               |could use key|                     |               |
    |    |            |               |to decrypt   |                     |               |
    |    |            |               |contents, 2) |                     |               |
-   |    |            |               |Malicious JS |                     |               |
+   |    |            |               |Malicious    |                     |               |
+   |    |            |               |Java Script  |                     |               |
    |    |            |               |can phish for|                     |               |
    |    |            |               |user         |                     |               |
    |    |            |               |credentials, |                     |               |
