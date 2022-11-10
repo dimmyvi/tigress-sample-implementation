@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-11-08T01:54:07.922041+00:00",
+  "timestamp": "2022-11-10T01:57:35.207777+00:00",
   "repo": "dimmyvi/tigress-sample-implementation",
   "labels": [
     {
@@ -50,5 +50,170 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOIWn1ws5Cctv5",
+      "title": "Update draft-tigress-sample-implementation.md",
+      "url": "https://github.com/dimmyvi/tigress-sample-implementation/pull/1",
+      "state": "MERGED",
+      "author": "dimmyvi",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Update based on feedback from Manuel",
+      "createdAt": "2022-11-08T18:03:22Z",
+      "updatedAt": "2022-11-09T21:10:14Z",
+      "baseRepository": "dimmyvi/tigress-sample-implementation",
+      "baseRefName": "main",
+      "baseRefOid": "450083adc9bb15b77180087cb2583166ea6c2f0b",
+      "headRepository": "dimmyvi/tigress-sample-implementation",
+      "headRefName": "dimmyvi-manuel-review",
+      "headRefOid": "827d5b4af0995920fcdfebb7d69c90aefe301f94",
+      "closedAt": "2022-11-09T21:10:14Z",
+      "mergedAt": "2022-11-09T21:10:14Z",
+      "mergedBy": "dimmyvi",
+      "mergeCommit": {
+        "oid": "a318b65d3a22c02018e3d3b79ec1c31ef3e57edf"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIWn1ws5F_7RP",
+          "commit": {
+            "abbreviatedOid": "c90540f"
+          },
+          "author": "castiz",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-11-09T16:33:05Z",
+          "updatedAt": "2022-11-09T16:33:05Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOIWn1ws5GAE8Q",
+          "commit": {
+            "abbreviatedOid": "c90540f"
+          },
+          "author": "ManuelGersterB",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2022-11-09T16:57:11Z",
+          "updatedAt": "2022-11-09T17:01:28Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "I would add CCC and URL here as well",
+              "createdAt": "2022-11-09T16:57:11Z",
+              "updatedAt": "2022-11-09T17:01:28Z"
+            },
+            {
+              "originalPosition": 62,
+              "body": "\"data of KeyCreationRequest\": I would say that the KeyCreationRequest is encrypted (and not the data of the KeyCreationRequest)",
+              "createdAt": "2022-11-09T16:58:13Z",
+              "updatedAt": "2022-11-09T17:01:28Z"
+            },
+            {
+              "originalPosition": 68,
+              "body": "I am not a native speaker, but I think \"secure against\" is correct",
+              "createdAt": "2022-11-09T16:58:54Z",
+              "updatedAt": "2022-11-09T17:01:28Z"
+            },
+            {
+              "originalPosition": 71,
+              "body": "\"e. g. using UUID\": This should be \"i. e. using UUID\", since using a UUID is specified in the draft, i. e., it is not an example",
+              "createdAt": "2022-11-09T16:59:33Z",
+              "updatedAt": "2022-11-09T17:01:28Z"
+            },
+            {
+              "originalPosition": 83,
+              "body": "\"Messaging application shows the a\": Remove \"the\"",
+              "createdAt": "2022-11-09T16:59:53Z",
+              "updatedAt": "2022-11-09T17:01:28Z"
+            },
+            {
+              "originalPosition": 88,
+              "body": "\"mailbiox\": Typo",
+              "createdAt": "2022-11-09T17:00:05Z",
+              "updatedAt": "2022-11-09T17:01:28Z"
+            },
+            {
+              "originalPosition": 104,
+              "body": "To be consistent with the statement above: \"to Friend**'s** device\"",
+              "createdAt": "2022-11-09T17:00:37Z",
+              "updatedAt": "2022-11-09T17:01:28Z"
+            },
+            {
+              "originalPosition": 133,
+              "body": "\"DEvice PIN\": wrong upper case for \"E\"",
+              "createdAt": "2022-11-09T17:01:14Z",
+              "updatedAt": "2022-11-09T17:01:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIWn1ws5GAZaI",
+          "commit": {
+            "abbreviatedOid": "c90540f"
+          },
+          "author": "dimmyvi",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-11-09T17:53:53Z",
+          "updatedAt": "2022-11-09T17:53:54Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "Do you mean - defining CCC as a Definition, adding reference to {{CCC-Digital-Key-30}} and using CCC further on in the document?",
+              "createdAt": "2022-11-09T17:53:53Z",
+              "updatedAt": "2022-11-09T17:53:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIWn1ws5GAhkF",
+          "commit": {
+            "abbreviatedOid": "c90540f"
+          },
+          "author": "dimmyvi",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-11-09T18:18:39Z",
+          "updatedAt": "2022-11-09T18:18:39Z",
+          "comments": [
+            {
+              "originalPosition": 133,
+              "body": "fixed all",
+              "createdAt": "2022-11-09T18:18:39Z",
+              "updatedAt": "2022-11-09T18:18:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOIWn1ws5GAlwQ",
+          "commit": {
+            "abbreviatedOid": "2b6b2aa"
+          },
+          "author": "dimmyvi",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-11-09T18:31:19Z",
+          "updatedAt": "2022-11-09T18:31:20Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "Added URL here",
+              "createdAt": "2022-11-09T18:31:19Z",
+              "updatedAt": "2022-11-09T18:31:20Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
