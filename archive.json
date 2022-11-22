@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-11-20T01:54:34.958654+00:00",
+  "timestamp": "2022-11-22T01:52:35.668094+00:00",
   "repo": "dimmyvi/tigress-sample-implementation",
   "labels": [
     {
@@ -62,7 +62,7 @@
       "labels": [],
       "body": "As I understand it, threat #3 is describing the secret being intercepted. Practically, this would seem to describe an attacker intercepting the share URL (e.g. \"https://www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002?v=c#hXlr6aRC7KgJpOLTNZaLsw==\" from the described example).\r\n\r\nThe mitigation mentions physical separation of the content from the secret. I believe this is describing the fact that the secret is sent directly from the owner to the friend while the content is hosted in the mailbox. But if the threat is the share URL with the secret being intercepted, what is preventing the attacker from accessing the content of the mailbox?\r\n\r\nThe second mitigation describes an optional second factor such as a PIN shared over the same message. Does this protect much of the attacker intercepts the message \"Here's my key  https://www.example.com/v1/m/2bba630e-519b-11ec-bf63-0242ac130002?v=c#hXlr6aRC7KgJpOLTNZaLsw==, the PIN is 1234\"?",
       "createdAt": "2022-11-18T21:26:52Z",
-      "updatedAt": "2022-11-19T00:24:07Z",
+      "updatedAt": "2022-11-21T15:53:43Z",
       "closedAt": null,
       "comments": [
         {
@@ -71,6 +71,13 @@
           "body": "HI Brad, \r\nMitigation for intercepting share URL along with the secret is recommendation to send both over secure channel, if that is not possible - then use a verification code (aka PIN) out of band - e.g. using voice call to the friend. We also think of a concept of second factor identification by the friend at the time they try to provision the key to their device / wallet, but do not have clear solution for that.",
           "createdAt": "2022-11-19T00:24:07Z",
           "updatedAt": "2022-11-19T00:24:07Z"
+        },
+        {
+          "author": "cyberrevenger",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi Brad and thank you for your question. Just to add on top of Dmitry's replay:\r\n1. Optional PIN as second factor need to be send via different channel and ideally with the one where Owner would be able somehow identify Friend on another end, As Dmitry mentioned making a voice may be a video call can be an option.\r\n2. Another mitigation that is not mentioned in the document could be a device claim sent by the Friend before an attack make an attempt to used intercepted link to redeem content from relay server.",
+          "createdAt": "2022-11-21T15:53:42Z",
+          "updatedAt": "2022-11-21T15:53:42Z"
         }
       ]
     }
